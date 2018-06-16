@@ -2,12 +2,173 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "kitchen-sink": {
+      "root": "apps/kitchen-sink/",
+      "sourceRoot": "apps/kitchen-sink/src",
+      "projectType": "application",
+      "prefix": "ng-productions",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/kitchen-sink",
+            "index": "apps/kitchen-sink/src/index.html",
+            "main": "apps/kitchen-sink/src/main.ts",
+            "polyfills": "apps/kitchen-sink/src/polyfills.ts",
+            "tsConfig": "apps/kitchen-sink/tsconfig.app.json",
+            "assets": [
+              "apps/kitchen-sink/src/favicon.ico",
+              "apps/kitchen-sink/src/assets"
+            ],
+            "styles": [
+              "apps/kitchen-sink/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/kitchen-sink/src/environments/environment.ts",
+                  "with": "apps/kitchen-sink/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "kitchen-sink:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "kitchen-sink:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "kitchen-sink:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/kitchen-sink/src/test.ts",
+            "polyfills": "apps/kitchen-sink/src/polyfills.ts",
+            "tsConfig": "apps/kitchen-sink/tsconfig.spec.json",
+            "karmaConfig": "apps/kitchen-sink/karma.conf.js",
+            "styles": [
+              "apps/kitchen-sink/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/kitchen-sink/src/favicon.ico",
+              "apps/kitchen-sink/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/kitchen-sink/tsconfig.app.json",
+              "apps/kitchen-sink/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "kitchen-sink-e2e": {
+      "root": "apps/kitchen-sink-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/kitchen-sink-e2e/protractor.conf.js",
+            "devServerTarget": "kitchen-sink:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/kitchen-sink-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "top-nav": {
+      "root": "libs/top-nav",
+      "sourceRoot": "libs/top-nav/src",
+      "projectType": "library",
+      "prefix": "ng-productions",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/top-nav/tsconfig.lib.json",
+            "project": "libs/top-nav/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/top-nav/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/top-nav/src/test.ts",
+            "tsConfig": "libs/top-nav/tsconfig.spec.json",
+            "karmaConfig": "libs/top-nav/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/top-nav/tsconfig.lib.json",
+              "libs/top-nav/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
       "versionMismatch": false
     },
     "defaultCollection": "@nrwl/schematics"
-  }
+  },
+  "defaultProject": "kitchen-sink"
 }

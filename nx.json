@@ -7,5 +7,17 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "kitchen-sink": {
+      "tags": [
+        "app"
+      ]
+    },
+    "kitchen-sink-e2e": {
+      "tags": []
+    },
+    "top-nav": {
+      "tags": []
+    }
+  }
 }

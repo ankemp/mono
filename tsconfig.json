@@ -16,6 +16,9 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@ng-productions/top-nav": [
+        "libs/top-nav/src/index.ts"
+      ]
     }
   },
   "exclude": [
