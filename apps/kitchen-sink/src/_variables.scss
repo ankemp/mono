@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+
+$primary: mat-palette($mat-pink);
+$accent:  mat-palette($mat-purple);
+$theme: mat-light-theme($primary, $accent);
+
+$primary-light: mat-color($primary, lighter);
+$primary-dark: mat-color($primary, darker);
+$accent-light: mat-color($accent, lighter);
+$accent-dark:  mat-color($accent, darker);
+
+$transition: 250ms ease-in-out;

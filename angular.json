@@ -7,7 +7,6 @@
       "root": "apps/kitchen-sink/",
       "sourceRoot": "apps/kitchen-sink/src",
       "projectType": "application",
-      "prefix": "ng-productions",
       "schematics": {},
       "architect": {
         "build": {
@@ -23,6 +22,8 @@
               "apps/kitchen-sink/src/assets"
             ],
             "styles": [
+              "node_modules/normalize.css/normalize.css",
+              "apps/kitchen-sink/src/theme.scss",
               "apps/kitchen-sink/src/styles.css"
             ],
             "scripts": []
@@ -121,7 +122,6 @@
       "root": "libs/top-nav",
       "sourceRoot": "libs/top-nav/src",
       "projectType": "library",
-      "prefix": "ng-productions",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

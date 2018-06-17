@@ -1,0 +1,24 @@
+@import 'variables';
+
+@include mat-core();
+@include angular-material-theme($theme);
+
+.primary-light-bg {
+  background-color: $primary-light;
+  color: #000000;
+}
+
+.primary-dark-bg {
+  background-color: $primary-dark;
+  color: #000000;
+}
+
+.accent-light-bg {
+  background-color: $accent-light;
+  color: #000000;
+}
+
+.accent-dark-bg {
+  background-color: $accent-dark;
+  color: #ffffff;
+}
