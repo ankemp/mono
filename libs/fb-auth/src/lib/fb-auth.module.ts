@@ -1,10 +1,20 @@
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-      import { NgModule } from '@angular/core';
-      import { CommonModule } from '@angular/common';
-      @NgModule({
-        imports: [
-          CommonModule
-        ]
-      })
-      export class FbAuthModule { }
-      
+import { AuthOptions, AuthOptionsToken } from './config';
+
+@NgModule({
+  imports: [
+    CommonModule
+  ]
+})
+export class FbAuthModule {
+  static config(options: AuthOptions): ModuleWithProviders {
+    return {
+      ngModule: FbAuthModule,
+      providers: [
+        { provide: AuthOptionsToken, useValue: options }
+      ]
+    }
+  }
+}
