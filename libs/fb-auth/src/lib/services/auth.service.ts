@@ -15,11 +15,13 @@ export class AuthService {
   private authUid: string;
   public authState: Observable<User>;
   public loggedIn: Observable<boolean>;
+  public providers: string[];
 
   constructor(
     private afAuth: AngularFireAuth,
     @Inject(AuthOptionsToken) private authOptions: AuthOptions
   ) {
+    this.providers = authOptions.providers;
     this.authState = afAuth.authState.pipe(
       map((state: User) => {
         this.authUid = state.uid;
@@ -39,7 +41,7 @@ export class AuthService {
   }
 
   login(provider: string): void {
-    if (this.authOptions.providers.includes(provider)) {
+    if (this.providers.includes(provider)) {
       this.afAuth.auth.signInWithPopup(this.useProvider(provider));
     } else {
       // show provider not included error

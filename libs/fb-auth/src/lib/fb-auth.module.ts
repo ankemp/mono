@@ -1,16 +1,21 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { NgStringPipesModule } from 'ngx-pipes';
 
 import { AuthOptions, AuthOptionsToken } from './config';
 import { AuthActionsComponent } from './auth-actions/auth-actions.component';
+import { OauthDialogComponent } from './oauth-dialog/oauth-dialog.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    NgStringPipesModule
   ],
-  declarations: [AuthActionsComponent],
+  entryComponents: [OauthDialogComponent],
+  declarations: [AuthActionsComponent, OauthDialogComponent],
   exports: [AuthActionsComponent]
 })
 export class FbAuthModule {
