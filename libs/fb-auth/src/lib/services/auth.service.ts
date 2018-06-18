@@ -14,6 +14,7 @@ import { AuthOptionsToken, AuthOptions } from '../config';
 export class AuthService {
   private authUid: string;
   public authState: Observable<User>;
+  public loggedIn: Observable<boolean>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -24,7 +25,10 @@ export class AuthService {
         this.authUid = state.uid;
         return state;
       })
-    )
+    );
+    this.loggedIn = afAuth.authState.pipe(
+      map((state: User) => (!!state && !!state.uid))
+    );
   }
 
   private useProvider(provider: string): AuthProvider {

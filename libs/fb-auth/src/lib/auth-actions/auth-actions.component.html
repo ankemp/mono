@@ -1,0 +1,9 @@
+<div *ngIf="!(authApi.loggedIn | async); else loggedIn" class="logged-out">
+  <button mat-button>Login</button>
+  <button mat-button>Register</button>
+</div>
+<ng-template #loggedIn>
+  <div class="logged-in">
+    <button mat-button>Logout</button>
+  </div>
+</ng-template>
