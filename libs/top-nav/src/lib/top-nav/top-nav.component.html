@@ -1,0 +1,25 @@
+<mat-sidenav-container>
+  <mat-toolbar color="primary">
+    <button mat-button class="sidenav-button" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="title" [class.show]="!sidenav.opened" routerLink="/">{{ appName }}</span>
+    <span class="filler"></span>
+    <ng-content select="[topnav-right]"></ng-content>
+  </mat-toolbar>
+
+  <mat-sidenav #sidenav [mode]="menuMode | async" [opened]="!(isSmallScreen | async)">
+    <div class="sidebar-logo-block" routerLink="/">{{ appName }}</div>
+    <mat-selection-list *ngIf="menuItems">
+      <mat-list-option *ngFor="let item of menuItems" [routerLink]="item.route">
+        <mat-icon matListIcon color="accent">{{ item.icon }}</mat-icon>
+        <span>{{ item.name }}</span>
+      </mat-list-option>
+    </mat-selection-list>
+    <ng-content select="[sidenav-extra]"></ng-content>
+  </mat-sidenav>
+
+  <div class="app-container">
+    <ng-content select="router-outlet"></ng-content>
+  </div>
+</mat-sidenav-container>

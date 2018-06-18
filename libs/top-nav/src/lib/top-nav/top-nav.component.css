@@ -1,0 +1,69 @@
+.mat-sidenav {
+  min-width: 250px;
+  padding: 0 16px 16px;
+  position: fixed;
+  top: 0;
+}
+
+.mat-sidenav-container {
+  transform: none;
+}
+
+.sidebar-logo-block {
+  align-items: center;
+  display: flex;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  justify-content: center;
+  min-height: 56px;
+}
+
+:host() ::ng-deep .mat-list-text {
+  align-items: center;
+  flex-direction: row !important;
+}
+
+.sidenav-button {
+  display: none;
+}
+
+.title {
+  display: inline-flex;
+  align-content: center;
+  cursor: pointer;
+  font-weight: normal;
+  overflow: hidden;
+}
+
+.title img {
+  height: 48px;
+  width: auto;
+}
+
+.filler {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+@media (min-width: 30em) {
+  .sidebar-logo-block {
+      min-height: 64px;
+  }
+}
+
+
+@media (min-width: 48em) {
+  .sidenav-button {
+      display: block;
+      margin-right: 16px;
+      min-width: 0;
+  }
+  .title:not(.show) {
+      display: none;
+  }
+}
