@@ -16,8 +16,11 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@ng-productions/top-nav": [
+      "@mono/top-nav": [
         "libs/top-nav/src/index.ts"
+      ],
+      "@mono/fb-auth": [
+        "libs/fb-auth/src/index.ts"
       ]
     }
   },

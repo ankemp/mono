@@ -1,5 +1,5 @@
 {
-  "npmScope": "ng-productions",
+  "npmScope": "mono",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
@@ -17,7 +17,15 @@
       "tags": []
     },
     "top-nav": {
-      "tags": []
+      "tags": [
+        "ui"
+      ]
+    },
+    "fb-auth": {
+      "tags": [
+        "ui",
+        "api"
+      ]
     }
   }
 }

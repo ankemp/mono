@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { MenuItem } from '../models';
 
 @Component({
-  selector: 'app-top-nav',
+  selector: 'mono-top-nav',
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.css']
 })
