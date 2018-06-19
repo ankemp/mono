@@ -16,18 +16,13 @@
     "kitchen-sink-e2e": {
       "tags": []
     },
-    "top-nav": {
-      "tags": [
-        "ui"
-      ]
-    },
     "fb-auth": {
       "tags": [
         "ui",
         "api"
       ]
     },
-    "bottom-nav": {
+    "navigation": {
       "tags": [
         "ui"
       ]

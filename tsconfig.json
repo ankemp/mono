@@ -16,14 +16,11 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@mono/top-nav": [
-        "libs/top-nav/src/index.ts"
-      ],
       "@mono/fb-auth": [
         "libs/fb-auth/src/index.ts"
       ],
-      "@mono/bottom-nav": [
-        "libs/bottom-nav/src/index.ts"
+      "@mono/navigation": [
+        "libs/navigation/src/index.ts"
       ]
     }
   },

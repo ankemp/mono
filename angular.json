@@ -118,46 +118,6 @@
         }
       }
     },
-    "top-nav": {
-      "root": "libs/top-nav",
-      "sourceRoot": "libs/top-nav/src",
-      "projectType": "library",
-      "prefix": "mono",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "libs/top-nav/tsconfig.lib.json",
-            "project": "libs/top-nav/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "libs/top-nav/ng-package.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "libs/top-nav/src/test.ts",
-            "tsConfig": "libs/top-nav/tsconfig.spec.json",
-            "karmaConfig": "libs/top-nav/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/top-nav/tsconfig.lib.json",
-              "libs/top-nav/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "fb-auth": {
       "root": "libs/fb-auth",
       "sourceRoot": "libs/fb-auth/src",
@@ -198,38 +158,38 @@
         }
       }
     },
-    "bottom-nav": {
-      "root": "libs/bottom-nav",
-      "sourceRoot": "libs/bottom-nav/src",
+    "navigation": {
+      "root": "libs/navigation",
+      "sourceRoot": "libs/navigation/src",
       "projectType": "library",
       "prefix": "mono",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "libs/bottom-nav/tsconfig.lib.json",
-            "project": "libs/bottom-nav/ng-package.json"
+            "tsConfig": "libs/navigation/tsconfig.lib.json",
+            "project": "libs/navigation/ng-package.json"
           },
           "configurations": {
             "production": {
-              "project": "libs/bottom-nav/ng-package.prod.json"
+              "project": "libs/navigation/ng-package.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/bottom-nav/src/test.ts",
-            "tsConfig": "libs/bottom-nav/tsconfig.spec.json",
-            "karmaConfig": "libs/bottom-nav/karma.conf.js"
+            "main": "libs/navigation/src/test.ts",
+            "tsConfig": "libs/navigation/tsconfig.spec.json",
+            "karmaConfig": "libs/navigation/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/bottom-nav/tsconfig.lib.json",
-              "libs/bottom-nav/tsconfig.spec.json"
+              "libs/navigation/tsconfig.lib.json",
+              "libs/navigation/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

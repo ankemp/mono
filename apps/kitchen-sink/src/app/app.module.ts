@@ -5,8 +5,7 @@ import { NxModule } from '@nrwl/nx';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FbAuthModule } from '@mono/fb-auth';
-import { TopNavModule } from '@mono/top-nav';
-import { BottomNavModule } from '@mono/bottom-nav';
+import { TopNavModule, BottomNavModule } from '@mono/navigation';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';

@@ -3,7 +3,7 @@ import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
 
 import { Observable } from 'rxjs';
 import { map, pairwise } from 'rxjs/operators';
-// import { MenuItem } from 'src/app/models';
+import { MenuItem } from '../../models';
 
 @Component({
   selector: 'mono-bottom-nav',
@@ -11,7 +11,7 @@ import { map, pairwise } from 'rxjs/operators';
   styleUrls: ['./bottom-nav.component.scss']
 })
 export class BottomNavComponent implements OnInit {
-  @Input() menuItems: any[];
+  @Input() menuItems: MenuItem[];
   private scrollEvent: Observable<CdkScrollable | void>;
   pageYOffset: Observable<number>;
   showNav = true;

@@ -3,7 +3,7 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MenuItem } from '../models';
+import { MenuItem } from '../../models';
 
 @Component({
   selector: 'mono-top-nav',

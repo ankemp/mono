@@ -1,5 +1,5 @@
 {
-  "name": "top-nav",
+  "name": "navigation",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/animations": "^6.0.0",
