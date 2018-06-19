@@ -22,7 +22,7 @@
   flex-direction: row !important;
 }
 
-.sidenav-button {
+.sidenav-button.no-bottom-nav {
   display: none;
 }
 
@@ -49,17 +49,15 @@
   justify-content: space-around;
 }
 
-
 @media (min-width: 30em) {
   .sidebar-logo-block {
       min-height: 64px;
   }
 }
 
-
 @media (min-width: 48em) {
   .sidenav-button {
-      display: block;
+      display: block !important;
       margin-right: 16px;
       min-width: 0;
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ import { MenuItem } from '../models';
 export class TopNavComponent implements OnInit {
   @Input() appName: string;
   @Input() menuItems: MenuItem[];
+  @ViewChild('bottomNav') bottomNav: ElementRef<HTMLDivElement>;
   isSmallScreen: Observable<boolean>;
   menuMode: Observable<'side' | 'over'>;
 
@@ -27,6 +28,10 @@ export class TopNavComponent implements OnInit {
     this.menuMode = this.isSmallScreen.pipe(
       map(matches => !matches ? 'side' : 'over')
     );
+  }
+
+  get bottomNavExists(): boolean {
+    return !!this.bottomNav.nativeElement.childElementCount;
   }
 
 }

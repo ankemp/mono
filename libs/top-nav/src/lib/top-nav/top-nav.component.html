@@ -1,6 +1,6 @@
 <mat-sidenav-container>
   <mat-toolbar color="primary">
-    <button mat-button class="sidenav-button" (click)="sidenav.toggle()">
+    <button mat-icon-button [ngClass]="{'no-bottom-nav': sidenavPostExists}" class="sidenav-button" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <span class="title" [class.show]="!sidenav.opened" routerLink="/">{{ appName }}</span>
@@ -23,3 +23,6 @@
     <ng-content select="router-outlet"></ng-content>
   </div>
 </mat-sidenav-container>
+<div #bottomNav class="bottom-nav">
+  <ng-content select="[bottom-nav]"></ng-content>
+</div>
