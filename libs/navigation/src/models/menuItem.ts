@@ -1,4 +1,4 @@
-export class MenuItem {
+export interface MenuItem {
   name: string;
   route: string;
   icon: string;

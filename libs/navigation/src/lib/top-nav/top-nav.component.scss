@@ -17,9 +17,17 @@
   min-height: 56px;
 }
 
-:host() ::ng-deep .mat-list-text {
-  align-items: center;
-  flex-direction: row !important;
+:host() ::ng-deep .mat-selection-list {
+  .mat-list-text {
+    align-items: center;
+    flex-direction: row !important;
+    &, span {
+      font-size: 16px !important;
+    }
+  }
+  .mat-pseudo-checkbox {
+    display: none;
+  }
 }
 
 .sidenav-button.no-bottom-nav {

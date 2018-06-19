@@ -8,7 +8,7 @@ import { MenuItem } from '../../models';
 @Component({
   selector: 'mono-top-nav',
   templateUrl: './top-nav.component.html',
-  styleUrls: ['./top-nav.component.css']
+  styleUrls: ['./top-nav.component.scss']
 })
 export class TopNavComponent implements OnInit {
   @Input() appName: string;
