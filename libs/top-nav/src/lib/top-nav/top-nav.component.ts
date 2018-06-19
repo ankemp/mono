@@ -31,7 +31,7 @@ export class TopNavComponent implements OnInit {
   }
 
   get bottomNavExists(): boolean {
-    return !!this.bottomNav.nativeElement.childElementCount;
+    return this.bottomNav.nativeElement.childElementCount > 0;
   }
 
 }
