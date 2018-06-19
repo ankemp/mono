@@ -6,6 +6,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FbAuthModule } from '@mono/fb-auth';
 import { TopNavModule } from '@mono/top-nav';
+import { BottomNavModule } from '@mono/bottom-nav';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
     AngularFireAuthModule,
     FbAuthModule.config(environment.auth),
     TopNavModule,
+    BottomNavModule,
     AppRoutingModule
   ],
   providers: [],

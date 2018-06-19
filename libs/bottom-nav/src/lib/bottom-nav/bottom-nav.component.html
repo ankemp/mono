@@ -1,0 +1,8 @@
+<mat-toolbar [ngClass]="{hide: !showNav}" color="primary">
+  <div *ngFor="let item of menuItems" class="bottom-item" [routerLink]="item.route" routerLinkActive="active">
+    <div mat-ripple>
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span>{{ item.name }}</span>
+    </div>
+  </div>
+</mat-toolbar>
