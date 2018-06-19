@@ -26,6 +26,11 @@
         "ui",
         "api"
       ]
+    },
+    "bottom-nav": {
+      "tags": [
+        "ui"
+      ]
     }
   }
 }
