@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatSnackBarModule } from '@angular/material';
 import { NgStringPipesModule } from 'ngx-pipes';
 
 import { AuthOptions, AuthOptionsToken } from './config';
@@ -12,6 +12,7 @@ import { OauthDialogComponent } from './oauth-dialog/oauth-dialog.component';
     CommonModule,
     MatButtonModule,
     MatDialogModule,
+    MatSnackBarModule,
     NgStringPipesModule
   ],
   entryComponents: [OauthDialogComponent],

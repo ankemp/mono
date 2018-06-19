@@ -2,5 +2,6 @@
 <div mat-dialog-content>
   <div class="providers">
     <button *ngFor="let provider of providers" mat-raised-button color="primary" (click)="selectProvider(provider)">{{ provider | ucfirst }}</button>
+    <button class="cancel" mat-button mat-dialog-close>Cancel</button>
   </div>
 </div>

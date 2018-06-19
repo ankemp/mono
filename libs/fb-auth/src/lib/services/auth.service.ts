@@ -15,11 +15,11 @@ export class AuthService {
   private authUid: string;
   public authState: Observable<User>;
   public loggedIn: Observable<boolean>;
-  public providers: string[];
+  public providers: Array<string>;
 
   constructor(
     private afAuth: AngularFireAuth,
-    @Inject(AuthOptionsToken) private authOptions: AuthOptions
+    @Inject(AuthOptionsToken) authOptions: AuthOptions
   ) {
     this.providers = authOptions.providers;
     this.authState = afAuth.authState.pipe(
@@ -33,22 +33,38 @@ export class AuthService {
     );
   }
 
-  private useProvider(provider: string): AuthProvider {
-    const providers = {
-      'google': new firebase.auth.GoogleAuthProvider()
+  private get oAuthProviders(): any {
+    return {
+      'google': new firebase.auth.GoogleAuthProvider(),
+      'facebook': new firebase.auth.FacebookAuthProvider(),
+      'twitter': new firebase.auth.TwitterAuthProvider(),
+      'github': new firebase.auth.GithubAuthProvider()
     };
-    return providers[provider];
   }
 
-  login(provider: string): void {
-    if (this.providers.includes(provider)) {
-      this.afAuth.auth.signInWithPopup(this.useProvider(provider));
-    } else {
-      // show provider not included error
+  private useOAuthProvider(provider: string): AuthProvider {
+    return this.oAuthProviders[provider];
+  }
+
+  private checkProvider(provider: string): boolean {
+    return this.providers.includes(provider);
+  }
+
+  login(provider: string): Promise<any> {
+    if (this.checkProvider(provider) && !!this.oAuthProviders[provider]) {
+      return this.afAuth.auth.signInWithPopup(this.useOAuthProvider(provider));
     }
+    return Promise.reject({ code: 'auth/provider-not-allowed', message: 'The provider you are trying to authorize through is not allowed for this application.' });
   }
 
-  logout(): void {
-    this.afAuth.auth.signOut();
+  register(provider: string): Promise<any> {
+    if (this.checkProvider(provider)) {
+      // this.afAuth.auth.
+    }
+    return Promise.reject({ code: 'auth/provider-not-allowed', message: 'The provider you are trying to authorize through is not allowed for this application.' });
+  }
+
+  logout(): Promise<any> {
+    return this.afAuth.auth.signOut();
   }
 }

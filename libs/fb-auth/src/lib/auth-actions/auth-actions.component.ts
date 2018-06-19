@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { OauthDialogComponent } from '../oauth-dialog/oauth-dialog.component';
@@ -9,18 +9,23 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './auth-actions.component.html',
   styleUrls: ['./auth-actions.component.css']
 })
-export class AuthActionsComponent implements OnInit {
+export class AuthActionsComponent {
 
   constructor(
     public authApi: AuthService,
     private dialog: MatDialog
   ) { }
 
-  ngOnInit() {
+  get showRegister(): boolean {
+    return !!this.authApi.providers.filter(p => ['email', 'phone', 'anonymous'].indexOf(p) > -1).length
   }
 
   private openOAuthDialog(): void {
     this.dialog.open(OauthDialogComponent, { data: this.authApi.providers });
+  }
+
+  private openRegisterDialog(): void {
+    //
   }
 
   login(): void {
@@ -28,7 +33,7 @@ export class AuthActionsComponent implements OnInit {
   }
 
   register(): void {
-    this.openOAuthDialog();
+    this.openRegisterDialog();
   }
 
 }
