@@ -1,15 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
 
 import { Observable, of } from 'rxjs';
-import { map, pairwise, startWith, distinctUntilChanged } from 'rxjs/operators';
+import { map, pairwise, startWith, distinctUntilChanged, tap } from 'rxjs/operators';
 import { WindowRef } from '../window-ref.service';
 import { MenuItem } from '../../models';
 
 @Component({
   selector: 'mono-bottom-nav',
   templateUrl: './bottom-nav.component.html',
-  styleUrls: ['./bottom-nav.component.scss']
+  styleUrls: ['./bottom-nav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BottomNavComponent implements OnInit {
   @Input() menuItems: MenuItem[];
@@ -18,6 +19,7 @@ export class BottomNavComponent implements OnInit {
   showNav$: Observable<boolean>;
 
   constructor(
+    private ref: ChangeDetectorRef,
     private dispatcher: ScrollDispatcher,
     windowRef: WindowRef
   ) {
@@ -31,9 +33,9 @@ export class BottomNavComponent implements OnInit {
       pairwise(),
       map(([newYOffset, oldYOffset]) => newYOffset >= oldYOffset),
       startWith(true),
-      distinctUntilChanged()
+      distinctUntilChanged(),
+      tap(_ => this.ref.detectChanges())
     );
-    this.showNav$.subscribe(console.log);
   }
 
 }
