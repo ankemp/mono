@@ -22,10 +22,8 @@ export class LoginDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required)
-    });
+    this.form = new FormGroup({});
+    this.withEmail();
   }
 
   get email(): AbstractControl {
@@ -34,6 +32,13 @@ export class LoginDialogComponent implements OnInit {
 
   get password(): AbstractControl {
     return this.form.get('password');
+  }
+
+  withEmail(): void {
+    this.form = this.fb.group({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required)
+    });
   }
 
   withPhone(): void {

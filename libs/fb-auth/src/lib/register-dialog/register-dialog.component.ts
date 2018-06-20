@@ -24,6 +24,7 @@ export class RegisterDialogComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({});
+    this.withEmail();
   }
 
   get email(): AbstractControl {
