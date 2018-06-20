@@ -5,7 +5,10 @@ import { Observable } from 'rxjs';
 import { skipWhile } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { OauthDialogComponent } from '../oauth-dialog/oauth-dialog.component';
+import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
 import { User } from '@firebase/auth-types';
+
+const MANUAL_PROVIDERS = ['email', 'phone'];
 
 @Component({
   selector: 'mono-auth-actions',
@@ -24,16 +27,24 @@ export class AuthActionsComponent {
     );
   }
 
+  get manualProviders(): string[] {
+    return this.authApi.providers.filter(p => MANUAL_PROVIDERS.includes(p));
+  }
+
+  get oAuthProviders(): string[] {
+    return this.authApi.providers.filter(p => !MANUAL_PROVIDERS.includes(p));
+  }
+
   get showRegister(): boolean {
-    return !!this.authApi.providers.filter(p => ['email', 'phone', 'anonymous'].indexOf(p) > -1).length
+    return !!this.oAuthProviders.length;
   }
 
   private openOAuthDialog(): void {
-    this.dialog.open(OauthDialogComponent, { data: this.authApi.providers });
+    this.dialog.open(OauthDialogComponent, { data: this.oAuthProviders });
   }
 
   private openRegisterDialog(): void {
-    //
+    this.dialog.open(RegisterDialogComponent, { data: this.manualProviders })
   }
 
   login(): void {

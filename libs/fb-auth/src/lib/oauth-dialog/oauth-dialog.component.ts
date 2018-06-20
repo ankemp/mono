@@ -18,7 +18,7 @@ export class OauthDialogComponent {
   ) { }
 
   selectProvider(provider: string): void {
-    this.authApi.login(provider).then(_ => {
+    this.authApi.oAuthLogin(provider).then(_ => {
       this.dialogRef.close();
     }).catch(error => {
       this.snackBar.open(error.message, '', {

@@ -1,0 +1,23 @@
+<h1 md-dialog-title>Register</h1>
+<div md-dialog-content>
+  <div *ngIf="!registerWith">
+    <div class="providers">
+      <button *ngFor="let provider of providers" mat-raised-button color="primary" (click)="selectProvider(provider)">{{ provider | ucfirst }}</button>
+      <button class="cancel" mat-button mat-dialog-close>Cancel</button>
+    </div>
+  </div>
+  <form *ngIf="!!registerWith" [formGroup]="form" (submit)="save($event)" autocomplete="off" novalidate>
+    <mat-form-field *ngIf="registerWith === 'email'">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="Email">
+      <mat-icon *ngIf="email.valid" matSuffix>check</mat-icon>
+      <mat-error *ngIf="email.invalid && email.errors['used']">email already in use</mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="registerWith === 'email'">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" placeholder="Password">
+      <mat-hint *ngIf="password.invalid || password.pristine">Longer than 8 characters</mat-hint>
+    </mat-form-field>
+    <button type="submit" mat-raised-button [disabled]="!form.pending && form.invalid" color="accent">Register</button>
+  </form>
+</div>

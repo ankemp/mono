@@ -8,6 +8,8 @@ import { map, startWith } from 'rxjs/operators';
 import { User, AuthProvider } from '@firebase/auth-types';
 import { AuthOptionsToken, AuthOptions } from '../config';
 
+const PROVIDER_NOT_ALLOWED = { code: 'auth/provider-not-allowed', message: 'The provider you are trying to authorize through is not allowed for this application.' };
+
 @Injectable({
   providedIn: 'root',
 })
@@ -51,18 +53,33 @@ export class AuthService {
     return this.providers.includes(provider);
   }
 
-  login(provider: string): Promise<any> {
+  private get providerNotAllowed(): Promise<any> {
+    return Promise.reject(PROVIDER_NOT_ALLOWED);
+  }
+
+  login(provider: string, { email, password }: { email: string, password: string }): Promise<any> {
+    if (this.checkProvider(provider)) {
+      return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    }
+    return this.providerNotAllowed;
+  }
+
+  oAuthLogin(provider: string): Promise<any> {
     if (this.checkProvider(provider) && !!this.oAuthProviders[provider]) {
       return this.afAuth.auth.signInWithPopup(this.useOAuthProvider(provider));
     }
-    return Promise.reject({ code: 'auth/provider-not-allowed', message: 'The provider you are trying to authorize through is not allowed for this application.' });
+    return this.providerNotAllowed;
   }
 
-  register(provider: string): Promise<any> {
+  checkEmail(email: string) {
+    return this.afAuth.auth.fetchSignInMethodsForEmail(email);
+  }
+
+  register(provider: string, { email, password }: { email: string, password: string }): Promise<any> {
     if (this.checkProvider(provider)) {
-      // this.afAuth.auth.
+      return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     }
-    return Promise.reject({ code: 'auth/provider-not-allowed', message: 'The provider you are trying to authorize through is not allowed for this application.' });
+    return this.providerNotAllowed;
   }
 
   logout(): Promise<any> {

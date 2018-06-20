@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: "766031976497"
   },
   auth: {
-    providers: ['google']
+    providers: ['email', 'google']
   }
 };
 
