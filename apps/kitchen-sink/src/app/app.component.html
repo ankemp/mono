@@ -1,5 +1,12 @@
 <mono-top-nav appName="Kitchen Sink" [menuItems]="menuItems">
-  <mono-auth-actions topnav-right></mono-auth-actions>
+  <mono-auth-actions topnav-right>
+    <div user-dropdown-extra>
+      <button mat-menu-item>
+        <mat-icon>list</mat-icon>
+        <span class="label">My Activity</span>
+      </button>
+    </div>
+  </mono-auth-actions>
   <router-outlet></router-outlet>
   <mono-bottom-nav bottom-nav [menuItems]="menuItems"></mono-bottom-nav>
 </mono-top-nav>

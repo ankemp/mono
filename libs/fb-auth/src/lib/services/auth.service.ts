@@ -4,7 +4,7 @@ import { firebase } from '@firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { User, AuthProvider } from '@firebase/auth-types';
 import { AuthOptionsToken, AuthOptions } from '../config';
 
@@ -23,8 +23,9 @@ export class AuthService {
   ) {
     this.providers = authOptions.providers;
     this.authState = afAuth.authState.pipe(
+      startWith(null),
       map((state: User) => {
-        this.authUid = state.uid;
+        this.authUid = state ? state.uid : null;
         return state;
       })
     );

@@ -1,0 +1,13 @@
+<img src="{{ user.photoURL || '/assets/no-photo.gif' }}" alt="{{ user.displayName }}" class="user" [matMenuTriggerFor]="menu"
+/>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item [routerLink]="'profile/' + user.uid">
+    <mat-icon>account_box</mat-icon>
+    <span class="label">My Profile</span>
+  </button>
+  <ng-content select="[dropdown-extra]"></ng-content>
+  <button mat-menu-item (click)="logout.emit()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span class="label">Logout</span>
+  </button>
+</mat-menu>

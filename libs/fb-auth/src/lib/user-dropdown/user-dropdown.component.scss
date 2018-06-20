@@ -1,0 +1,18 @@
+$transition: 250ms ease-in-out;
+
+.user {
+  border-radius: 50%;
+  cursor: pointer;
+  height: 2.25em;
+  transition: $transition;
+  vertical-align: bottom;
+  width: 2.25em;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.label {
+  vertical-align: inherit;
+}

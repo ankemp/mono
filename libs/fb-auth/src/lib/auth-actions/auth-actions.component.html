@@ -1,9 +1,11 @@
-<div *ngIf="!(authApi.loggedIn | async); else loggedIn" class="logged-out">
-  <button mat-button (click)="login()">Login</button>
-  <button *ngIf="showRegister" mat-button (click)="register()">Register</button>
+<div *ngIf="(currentUser$ | async) as currentUser; else loggedOut" class="logged-out">
+  <mono-user-dropdown [user]="currentUser" (logout)="logout()">
+    <ng-content dropdown-extra select="[user-dropdown-extra]"></ng-content>
+  </mono-user-dropdown>
 </div>
-<ng-template #loggedIn>
-  <div class="logged-in">
-    <button mat-button>Logout</button>
+<ng-template #loggedOut>
+  <div class="logged-out">
+    <button mat-button (click)="login()">Login</button>
+    <button *ngIf="showRegister" mat-button (click)="register()">Register</button>
   </div>
 </ng-template>
