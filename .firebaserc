@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "mono-kitchen-sink",
+    "kitchen-sink": "mono-kitchen-sink"
+  }
+}
