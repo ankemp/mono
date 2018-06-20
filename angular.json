@@ -197,6 +197,46 @@
           }
         }
       }
+    },
+    "fb-user-profile": {
+      "root": "libs/fb-user-profile",
+      "sourceRoot": "libs/fb-user-profile/src",
+      "projectType": "library",
+      "prefix": "mono",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/fb-user-profile/tsconfig.lib.json",
+            "project": "libs/fb-user-profile/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/fb-user-profile/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/fb-user-profile/src/test.ts",
+            "tsConfig": "libs/fb-user-profile/tsconfig.spec.json",
+            "karmaConfig": "libs/fb-user-profile/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/fb-user-profile/tsconfig.lib.json",
+              "libs/fb-user-profile/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "schematics": {

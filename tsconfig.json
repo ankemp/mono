@@ -21,6 +21,9 @@
       ],
       "@mono/navigation": [
         "libs/navigation/src/index.ts"
+      ],
+      "@mono/fb-user-profile": [
+        "libs/fb-user-profile/src/index.ts"
       ]
     }
   },
