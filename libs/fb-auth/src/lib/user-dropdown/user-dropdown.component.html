@@ -1,5 +1,4 @@
-<img src="{{ user.photoURL || '/assets/no-photo.gif' }}" alt="{{ user.displayName }}" class="user" [matMenuTriggerFor]="menu"
-/>
+<img src="{{ user.photoURL || noAvatar }}" alt="{{ user.displayName }}" class="user" [matMenuTriggerFor]="menu" />
 <mat-menu #menu="matMenu">
   <button mat-menu-item [routerLink]="'profile/' + user.uid">
     <mat-icon>account_box</mat-icon>
