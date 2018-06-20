@@ -3,8 +3,8 @@ import { Injectable, Inject } from '@angular/core';
 import { firebase } from '@firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, startWith, skipWhile } from 'rxjs/operators';
 import { User, AuthProvider } from '@firebase/auth-types';
 import { AuthOptionsToken, AuthOptions } from '../config';
 
@@ -14,7 +14,7 @@ const PROVIDER_NOT_ALLOWED = { code: 'auth/provider-not-allowed', message: 'The 
   providedIn: 'root',
 })
 export class AuthService {
-  private authUid: string;
+  public authUid = new Subject<string>();
   public authState: Observable<User>;
   public loggedIn: Observable<boolean>;
   public providers: Array<string>;
@@ -25,15 +25,13 @@ export class AuthService {
   ) {
     this.providers = authOptions.providers;
     this.authState = afAuth.authState.pipe(
-      startWith(null),
-      map((state: User) => {
-        this.authUid = state ? state.uid : null;
-        return state;
-      })
+      skipWhile(state => !state),
+      startWith(null)
     );
     this.loggedIn = afAuth.authState.pipe(
       map((state: User) => (!!state && !!state.uid))
     );
+    this.authState.subscribe(state => !!state ? this.authUid.next(state.uid) : this.authUid.next(null));
   }
 
   private get oAuthProviders(): any {
