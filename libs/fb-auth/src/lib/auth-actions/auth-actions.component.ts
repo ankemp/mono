@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { skipWhile } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { OauthDialogComponent } from '../oauth-dialog/oauth-dialog.component';
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
 import { User } from '@firebase/auth-types';
 
@@ -40,7 +40,7 @@ export class AuthActionsComponent {
   }
 
   private openOAuthDialog(): void {
-    this.dialog.open(OauthDialogComponent, { data: this.oAuthProviders });
+    this.dialog.open(LoginDialogComponent, { data: this.oAuthProviders });
   }
 
   private openRegisterDialog(): void {

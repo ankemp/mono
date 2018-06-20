@@ -14,7 +14,7 @@ import { NgStringPipesModule } from 'ngx-pipes';
 
 import { AuthOptions, AuthOptionsToken } from './config';
 import { AuthActionsComponent } from './auth-actions/auth-actions.component';
-import { OauthDialogComponent } from './oauth-dialog/oauth-dialog.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 
@@ -31,8 +31,8 @@ import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
     MatSnackBarModule,
     NgStringPipesModule
   ],
-  entryComponents: [OauthDialogComponent, RegisterDialogComponent],
-  declarations: [AuthActionsComponent, OauthDialogComponent, RegisterDialogComponent, UserDropdownComponent],
+  entryComponents: [LoginDialogComponent, RegisterDialogComponent],
+  declarations: [AuthActionsComponent, LoginDialogComponent, RegisterDialogComponent, UserDropdownComponent],
   exports: [AuthActionsComponent]
 })
 export class FbAuthModule {
