@@ -1,4 +1,4 @@
-<mat-toolbar [ngClass]="{hide: !showNav}" color="primary">
+<mat-toolbar *ngIf="showNav$ | async as showNav" [ngClass]="{hide: showNav}" color="primary">
   <div *ngFor="let item of menuItems" class="bottom-item" [routerLink]="item.route" routerLinkActive="active">
     <div mat-ripple>
       <mat-icon>{{ item.icon }}</mat-icon>

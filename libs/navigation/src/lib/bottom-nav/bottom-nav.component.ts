@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
 
-import { Observable } from 'rxjs';
-import { map, pairwise } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, pairwise, startWith, distinctUntilChanged } from 'rxjs/operators';
 import { WindowRef } from '../window-ref.service';
 import { MenuItem } from '../../models';
 
@@ -13,24 +13,27 @@ import { MenuItem } from '../../models';
 })
 export class BottomNavComponent implements OnInit {
   @Input() menuItems: MenuItem[];
-  private scrollEvent: Observable<CdkScrollable | void>;
+  private scrollEvent$: Observable<CdkScrollable | void>;
   private nativeWindow: Window;
-  pageYOffset: Observable<number>;
-  showNav = true;
+  showNav$: Observable<boolean>;
 
   constructor(
     private dispatcher: ScrollDispatcher,
     windowRef: WindowRef
   ) {
-    this.scrollEvent = this.dispatcher.scrolled();
+    this.scrollEvent$ = this.dispatcher.scrolled();
     this.nativeWindow = windowRef.nativeWindow;
   }
 
   ngOnInit() {
-    this.pageYOffset = this.scrollEvent.pipe(map(_ => this.nativeWindow.pageYOffset));
-    this.pageYOffset.pipe(pairwise()).subscribe(([newYOffset, oldYOffset]) => {
-      this.showNav = (newYOffset >= oldYOffset);
-    });
+    this.showNav$ = this.scrollEvent$.pipe(
+      map(_ => this.nativeWindow.pageYOffset),
+      pairwise(),
+      map(([newYOffset, oldYOffset]) => newYOffset >= oldYOffset),
+      startWith(true),
+      distinctUntilChanged()
+    );
+    this.showNav$.subscribe(console.log);
   }
 
 }
