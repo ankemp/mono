@@ -20,4 +20,5 @@ form .mat-input-container {
 
 form .mat-raised-button {
   align-self: flex-end;
+  margin-top: 8px;
 }
