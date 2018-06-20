@@ -9,7 +9,10 @@ import { MenuItem } from '@mono/navigation';
 })
 export class AppComponent {
   menuItems: MenuItem[] = [
-    { name: 'Home', route: '/', icon: 'home' }
+    { name: 'Home', route: '/', icon: 'home' },
+    { name: 'Messages', route: '/', icon: 'message' },
+    { name: 'Shared Files', route: '/', icon: 'folder_shared' },
+    { name: 'Groups', route: '/', icon: 'group' }
   ];
 
   constructor() { }
