@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 import { MenuItem } from '../../models';
 
 @Component({
@@ -23,10 +23,12 @@ export class TopNavComponent implements OnInit {
 
   ngOnInit() {
     this.isSmallScreen = this.breakpointObserver.observe('(max-width: 786px)').pipe(
-      map((state: BreakpointState) => state.matches)
+      map((state: BreakpointState) => state.matches),
+      distinctUntilChanged()
     );
     this.menuMode = this.isSmallScreen.pipe(
-      map(matches => !matches ? 'side' : 'over')
+      map(matches => !matches ? 'side' : 'over'),
+      distinctUntilChanged<'side' | 'over'>()
     );
   }
 

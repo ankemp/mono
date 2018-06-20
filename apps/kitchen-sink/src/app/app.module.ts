@@ -6,7 +6,7 @@ import { MatIconModule, MatMenuModule } from '@angular/material';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FbAuthModule } from '@mono/fb-auth';
-import { TopNavModule, BottomNavModule } from '@mono/navigation';
+import { NavigationModule } from '@mono/navigation';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,8 +23,7 @@ import { AppComponent } from './app.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     FbAuthModule.config(environment.auth),
-    TopNavModule,
-    BottomNavModule,
+    NavigationModule,
     AppRoutingModule
   ],
   providers: [],
