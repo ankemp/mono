@@ -1,0 +1,5 @@
+<h1>Manage Account</h1>
+<div *ngIf="!(publicProfile$ | async)">
+  Looks like your profile isn't public.
+  <a>Make public</a>.
+</div>

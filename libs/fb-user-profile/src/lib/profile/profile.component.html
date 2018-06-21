@@ -1,0 +1,5 @@
+<span style="display: none;">{{ userProfile$ | async | json }}</span>
+<mono-manage-profile *ngIf="isAuthUser$ | async; else showPublicProfile" [userProfile]="userProfile$"></mono-manage-profile>
+<ng-template #showPublicProfile>
+  <mono-public-profile [userProfile]="userProfile$ | async"></mono-public-profile>
+</ng-template>

@@ -1,0 +1,7 @@
+<div *ngIf="userProfile; else noPublicProfile">
+  <h1>Profile</h1>
+  {{ userProfile | json }}
+</div>
+<ng-template #noPublicProfile>
+  <h1>User doesn't have a public profile</h1>
+</ng-template>
