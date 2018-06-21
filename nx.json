@@ -29,6 +29,9 @@
     },
     "fb-user-profile": {
       "tags": []
+    },
+    "ui-state": {
+      "tags": []
     }
   }
 }

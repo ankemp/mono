@@ -237,6 +237,34 @@
           }
         }
       }
+    },
+    "ui-state": {
+      "root": "libs/ui-state",
+      "sourceRoot": "libs/ui-state/src",
+      "projectType": "library",
+      "prefix": "mono",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/ui-state/src/test.ts",
+            "tsConfig": "libs/ui-state/tsconfig.spec.json",
+            "karmaConfig": "libs/ui-state/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui-state/tsconfig.lib.json",
+              "libs/ui-state/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "schematics": {

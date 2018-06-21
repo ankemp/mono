@@ -24,6 +24,9 @@
       ],
       "@mono/fb-user-profile": [
         "libs/fb-user-profile/src/index.ts"
+      ],
+      "@mono/ui-state": [
+        "libs/ui-state/src/index.ts"
       ]
     }
   },
