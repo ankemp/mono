@@ -32,6 +32,9 @@
     },
     "ui-state": {
       "tags": []
+    },
+    "notification-banner": {
+      "tags": []
     }
   }
 }

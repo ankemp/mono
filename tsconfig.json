@@ -27,6 +27,9 @@
       ],
       "@mono/ui-state": [
         "libs/ui-state/src/index.ts"
+      ],
+      "@mono/notification-banner": [
+        "libs/notification-banner/src/index.ts"
       ]
     }
   },
