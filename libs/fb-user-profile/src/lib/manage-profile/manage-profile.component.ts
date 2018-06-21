@@ -22,8 +22,7 @@ export class ManageProfileComponent implements OnInit {
     );
     this.publicProfile$ = this.userProfile.pipe(
       map(([, publicProfile]) => publicProfile)
-    )
-    this.userProfile.subscribe(console.log);
+    );
   }
 
 }
