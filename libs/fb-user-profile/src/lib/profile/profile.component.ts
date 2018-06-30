@@ -12,7 +12,7 @@ import { ProfileService } from '../services/profile.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  userProfile$: Observable<any>;
+  userProfile$: Observable<any[] | any>;
   isAuthUser$: Observable<boolean>;
   loading$: Observable<boolean>;
 

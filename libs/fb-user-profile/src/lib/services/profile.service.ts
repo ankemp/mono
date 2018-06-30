@@ -21,4 +21,8 @@ export class ProfileService {
     )
   }
 
+  updateProfile(uid: string, profile): Promise<any> {
+    return this.afs.doc<any>(`profiles/${uid}`).set(profile);
+  }
+
 }
