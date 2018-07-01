@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { NBState, getTopBanner } from '@mono/ui-state';
 import { Banner } from '../../models';
 
 @Component({
@@ -11,7 +13,9 @@ import { Banner } from '../../models';
 export class BannerContainerComponent implements OnInit {
   banner$: Observable<Banner>;
 
-  constructor() { }
+  constructor(store: Store<NBState>) {
+    this.banner$ = store.pipe(select(getTopBanner));
+  }
 
   ngOnInit() {
   }

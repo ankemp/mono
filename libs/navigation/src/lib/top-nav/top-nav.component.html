@@ -7,7 +7,7 @@
     <span class="filler"></span>
     <ng-content select="[topnav-right]"></ng-content>
   </mat-toolbar>
-  <ng-content select="mono-notification-banner"></ng-content>
+  <ng-content select="mono-banner-container"></ng-content>
 
   <mat-sidenav #sidenav [mode]="menuMode | async" [opened]="!(isSmallScreen | async)">
     <div class="sidebar-logo-block" routerLink="/">{{ appName }}</div>
