@@ -9,13 +9,13 @@ export enum SNActionTypes {
 export class SetSmallScreen implements Action {
   readonly type = SNActionTypes.SetSmallScreen;
 
-  constructor(public isSmallScreen: boolean) { }
+  constructor(public payload: boolean) { }
 }
 
 export class SetMenuMode implements Action {
   readonly type = SNActionTypes.SetMenuMode;
 
-  constructor(public menuMode: 'side' | 'over') { }
+  constructor(public payload: 'side' | 'over') { }
 }
 
 export class ToggleSideNav implements Action {

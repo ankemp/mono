@@ -17,8 +17,8 @@ export function reducer(state: State = initialState, action: SNActionsUnion) {
     case SNActionTypes.SetSmallScreen: {
       return {
         ...state,
-        isSmallScreen: action.isSmallScreen,
-        menuMode: action.isSmallScreen ? 'over' : 'side'
+        isSmallScreen: action.payload,
+        menuMode: action.payload ? 'over' : 'side'
       }
     }
 

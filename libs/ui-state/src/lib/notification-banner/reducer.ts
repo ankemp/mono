@@ -16,21 +16,21 @@ export function reducer(state: State = initialState, action: NBActionsUnion): St
     case NBActionTypes.AddBanner: {
       return {
         ...state,
-        banners: [...state.banners, action.banner]
+        banners: [...state.banners, action.payload]
       }
     }
 
     case NBActionTypes.RemoveBanner: {
       return {
         ...state,
-        banners: state.banners.filter(({ id }) => id !== action.id)
+        banners: state.banners.filter(({ id }) => id !== action.payload)
       }
     }
 
     case NBActionTypes.SetBanner: {
       return {
         ...state,
-        activeBanner: action.id
+        activeBanner: action.payload
       }
     }
 

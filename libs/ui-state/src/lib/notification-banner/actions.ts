@@ -10,19 +10,19 @@ export enum NBActionTypes {
 export class AddBanner implements Action {
   readonly type = NBActionTypes.AddBanner;
 
-  constructor(public banner: Banner) { }
+  constructor(public payload: Banner) { }
 }
 
 export class RemoveBanner implements Action {
   readonly type = NBActionTypes.RemoveBanner;
 
-  constructor(public id: string) { }
+  constructor(public payload: string) { }
 }
 
 export class SetBanner implements Action {
   readonly type = NBActionTypes.SetBanner;
 
-  constructor(public id: string) { }
+  constructor(public payload: string) { }
 }
 
 export type NBActionsUnion = AddBanner | RemoveBanner | SetBanner;
