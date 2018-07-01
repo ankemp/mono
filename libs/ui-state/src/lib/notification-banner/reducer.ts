@@ -17,14 +17,14 @@ export function reducer(state: State = initialState, action: NBActionsUnion): St
       return {
         ...state,
         banners: [...state.banners, action.banner]
-      };
+      }
     }
 
     case NBActionTypes.RemoveBanner: {
       return {
         ...state,
         banners: state.banners.filter(({ id }) => id !== action.id)
-      };
+      }
     }
 
     case NBActionTypes.SetBanner: {

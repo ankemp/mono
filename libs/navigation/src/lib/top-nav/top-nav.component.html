@@ -1,15 +1,15 @@
 <mat-sidenav-container>
   <mat-toolbar color="primary">
-    <button mat-icon-button [ngClass]="{'no-bottom-nav': bottomNavExists}" class="sidenav-button" (click)="sidenav.toggle()">
+    <button mat-icon-button [ngClass]="{'no-bottom-nav': bottomNavExists}" class="sidenav-button" (click)="toggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="title" [class.show]="!sidenav.opened" routerLink="/">{{ appName }}</span>
+    <span class="title" [class.show]="!(sidenavOpened$ | async)" routerLink="/">{{ appName }}</span>
     <span class="filler"></span>
     <ng-content select="[topnav-right]"></ng-content>
   </mat-toolbar>
   <ng-content select="mono-banner-container"></ng-content>
 
-  <mat-sidenav #sidenav [mode]="menuMode | async" [opened]="!(isSmallScreen | async)">
+  <mat-sidenav #sidenav [mode]="menuMode$ | async" [opened]="sidenavOpened$ | async">
     <div class="sidebar-logo-block" routerLink="/">{{ appName }}</div>
     <mat-selection-list *ngIf="menuItems">
       <mat-list-option *ngFor="let item of menuItems" [routerLink]="item.route">
