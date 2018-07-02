@@ -18,7 +18,8 @@ export function reducer(state: State = initialState, action: SNActionsUnion) {
       return {
         ...state,
         isSmallScreen: action.payload,
-        menuMode: action.payload ? 'over' : 'side'
+        menuMode: action.payload ? 'over' : 'side',
+        showSideNav: !action.payload
       }
     }
 
