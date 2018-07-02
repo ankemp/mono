@@ -1,5 +1,5 @@
 import { NBActionTypes, NBActionsUnion } from './actions';
-import { Banner } from '@mono/notification-banner';
+import { Banner } from '../../models';
 
 export interface State {
   banners: Banner[];

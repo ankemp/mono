@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { NBState, getTopBanner } from '@mono/ui-state';
-import { Banner } from '../../models';
+import { Banner, NBState, getTopBanner } from '@mono/ui-state';
 
 @Component({
   selector: 'mono-banner-container',

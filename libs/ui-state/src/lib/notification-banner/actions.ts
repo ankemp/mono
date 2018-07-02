@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Banner } from '@mono/notification-banner';
+import { Banner } from '../../models';
 
 export enum NBActionTypes {
   AddBanner = '[Notification Banner] Add Banner',

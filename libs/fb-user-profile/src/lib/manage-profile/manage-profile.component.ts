@@ -4,9 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable, empty, } from 'rxjs';
 import { map, withLatestFrom, switchMap } from 'rxjs/operators';
 import { User } from '@firebase/auth-types';
-import { NBState, AddBanner, RemoveBanner } from '@mono/ui-state';
+import { Banner, NBState, AddBanner, RemoveBanner } from '@mono/ui-state';
 import { ProfileService } from '../services/profile.service';
-import { Banner } from '@mono/notification-banner';
 
 @Component({
   selector: 'mono-manage-profile',

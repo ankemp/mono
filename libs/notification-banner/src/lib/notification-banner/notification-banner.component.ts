@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { Banner } from '../../models';
+import { Banner } from '@mono/ui-state';
 
 @Component({
   selector: 'mono-notification-banner',
