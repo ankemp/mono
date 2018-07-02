@@ -3,6 +3,6 @@ export interface Banner {
   index: number;
   desc: string;
   buttonText: string;
-  action: (event: Event) => void;
+  action: (event?: Event) => void;
   color: string;
 }

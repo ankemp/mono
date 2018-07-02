@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { Banner } from '@mono/ui-state';
+import { Banner, NBState, DoBannerAction } from '@mono/ui-state';
 
 @Component({
   selector: 'mono-notification-banner',
@@ -8,11 +9,15 @@ import { Banner } from '@mono/ui-state';
   styleUrls: ['./notification-banner.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationBannerComponent implements OnInit {
+export class NotificationBannerComponent {
   @Input() banner: Banner;
 
-  constructor() { }
+  constructor(
+    private store: Store<NBState>
+  ) { }
 
-  ngOnInit() { }
+  doBannerAction(): void {
+    this.store.dispatch(new DoBannerAction(this.banner));
+  }
 
 }

@@ -2,6 +2,6 @@
   <div class="message">{{ banner.desc }}</div>
   <span class="spacer"></span>
   <div *ngIf="banner.action && banner.buttonText" class="action">
-    <button mat-button (click)="banner.action($event)">{{ banner.buttonText }}</button>
+    <button mat-button (click)="doBannerAction()">{{ banner.buttonText }}</button>
   </div>
 </mat-toolbar>

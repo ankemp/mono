@@ -47,7 +47,7 @@ export class ManageProfileComponent implements OnInit, OnDestroy {
         index: 0,
         desc: 'Looks like your profile isn\'t public.',
         buttonText: 'Make Public',
-        action: this.makePublic,
+        action: () => this.makePublic,
         color: 'accent'
       };
       this.store.dispatch(new AddBanner(banner));
@@ -59,18 +59,14 @@ export class ManageProfileComponent implements OnInit, OnDestroy {
   }
 
   makePublic(): void {
-    empty().pipe(
-      withLatestFrom(this.authProfile$),
-      switchMap(([, profile]) => {
-        const publicProfile = {
-          uid: profile.uid,
-          avatar: profile.photoURL,
-          email: profile.email,
-          displayName: profile.displayName
-        }
-        return this.profileApi.updateProfile(profile.uid, publicProfile);
-      })
-    )
+    console.log('makePublic()');
+    // const publicProfile = {
+    //   uid: profile.uid,
+    //   avatar: profile.photoURL,
+    //   email: profile.email,
+    //   displayName: profile.displayName
+    // }
+    // return this.profileApi.updateProfile(profile.uid, publicProfile);
   }
 
 }

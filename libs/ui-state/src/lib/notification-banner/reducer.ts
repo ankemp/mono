@@ -20,7 +20,8 @@ export function reducer(state: State = initialState, action: NBActionsUnion): St
       }
     }
 
-    case NBActionTypes.RemoveBanner: {
+    case NBActionTypes.RemoveBanner:
+    case NBActionTypes.DoBannerActionSuccess: {
       return {
         ...state,
         banners: state.banners.filter(({ id }) => id !== action.payload)
@@ -41,4 +42,4 @@ export function reducer(state: State = initialState, action: NBActionsUnion): St
 }
 
 export const getActiveBanner = (state: State) => state.banners.find(b => b.id === state.activeBanner);
-export const getTopBanner = (state: State) => state.banners.sort((a, b) => a.index - b.index).shift();
+export const getTopBanner = (state: State) => state.banners.sort((a, b) => a.index - b.index)[0];
