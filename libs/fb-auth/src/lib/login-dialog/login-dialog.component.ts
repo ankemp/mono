@@ -1,8 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Store } from '@ngrx/store';
 
-import { AuthService } from '../services/auth.service';
+import { OAuthLogin, Login } from '../state/auth.actions';
+import { State } from '../state/auth.reducer';
 
 @Component({
   selector: 'mono-login-dialog',
@@ -14,11 +16,10 @@ export class LoginDialogComponent implements OnInit {
   loginWith = 'email';
 
   constructor(
+    private store: Store<State>,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public providers: string[],
-    private snackBar: MatSnackBar,
-    private authApi: AuthService
+    @Inject(MAT_DIALOG_DATA) public providers: string[]
   ) { }
 
   ngOnInit() {
@@ -48,33 +49,27 @@ export class LoginDialogComponent implements OnInit {
     this.loginWith = 'phone';
   }
 
-  private showToast(message: string): void {
-    this.snackBar.open(message, '', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-    });
-  }
-
   login($event: Event): void {
     $event.preventDefault();
     if (this.form.valid && this.loginWith === 'email') {
       const email = this.email.value as string;
       const password = this.password.value as string;
-      this.authApi.login('email', { email, password }).then(_ => {
-        this.dialogRef.close();
-      }).catch(error => {
-        this.showToast(error.message);
-      })
+      this.store.dispatch(new Login({ provider: this.loginWith, email, password }));
+      // this.authApi.login('email', { email, password }).then(_ => {
+      //   this.dialogRef.close();
+      // }).catch(error => {
+      //   this.showToast(error.message);
+      // })
     }
   }
 
   selectProvider(provider: string): void {
-    this.authApi.oAuthLogin(provider).then(_ => {
-      this.dialogRef.close();
-    }).catch(error => {
-      this.showToast(error.message);
-    });
+    this.store.dispatch(new OAuthLogin(provider));
+    // this.authApi.oAuthLogin(provider).then(_ => {
+    //   this.dialogRef.close();
+    // }).catch(error => {
+    //   this.showToast(error.message);
+    // });
   }
 
 }

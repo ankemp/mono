@@ -12,7 +12,7 @@ export const reducers: ActionReducerMap<UIState> = {
   sidenav: fromSN.reducer
 }
 
-export const getUIState = createFeatureSelector<UIState>('ui')
+export const getUIState = createFeatureSelector<UIState>('ui');
 
 // Notification Banner Selectors
 export const getNBState = createSelector(getUIState, state => state.notificationBanner);

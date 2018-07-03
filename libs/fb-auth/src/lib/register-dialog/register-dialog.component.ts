@@ -1,9 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { Store } from '@ngrx/store';
 
 import { AuthService } from '../services/auth.service';
 import { AuthValidators } from '../validators';
+import { State } from '../state/auth.reducer';
 
 @Component({
   selector: 'mono-register-dialog',
@@ -15,6 +17,7 @@ export class RegisterDialogComponent implements OnInit {
   registerWith: string;
 
   constructor(
+    private store: Store<State>,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegisterDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public providers: string[],
@@ -67,15 +70,16 @@ export class RegisterDialogComponent implements OnInit {
     if (this.form.valid && this.registerWith === 'email') {
       const email = this.email.value as string;
       const password = this.password.value as string;
-      this.authApi.register('email', { email, password }).then(_ => {
-        this.dialogRef.close();
-      }).catch(error => {
-        this.snackBar.open(error.message, '', {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
-      })
+      // this.store.dispatch(new Register());
+      // this.authApi.register('email', { email, password }).then(_ => {
+      //   this.dialogRef.close();
+      // }).catch(error => {
+      //   this.snackBar.open(error.message, '', {
+      //     duration: 3000,
+      //     horizontalPosition: 'center',
+      //     verticalPosition: 'bottom'
+      //   });
+      // })
     }
   }
 

@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { skipWhile } from 'rxjs/operators';
+import { takeUntil, skipWhile } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
-import { User } from '@firebase/auth-types';
-
-const MANUAL_PROVIDERS = ['email', 'phone'];
+import { State } from '../state/auth.reducer';
+import { getCurrentUser } from '../state';
+import { Logout, GetUser } from '../state/auth.actions';
+import { User } from '../../models';
 
 @Component({
   selector: 'mono-auth-actions',
@@ -19,32 +21,56 @@ export class AuthActionsComponent {
   currentUser$: Observable<User>;
 
   constructor(
+    private store: Store<State>,
     private authApi: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
-    this.currentUser$ = authApi.authState.pipe(
-      skipWhile((state: User) => state === null)
+    this.currentUser$ = store.pipe(
+      select(getCurrentUser),
+      skipWhile(user => !user.uid)
     );
+    this.store.dispatch(new GetUser());
+  }
+
+  private showToast(message: string): void {
+    this.snackBar.open(message, '', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 
   get manualProviders(): string[] {
-    return this.authApi.providers.filter(p => MANUAL_PROVIDERS.includes(p));
+    return this.authApi.manualProviders;
   }
 
   get oAuthProviders(): string[] {
-    return this.authApi.providers.filter(p => !MANUAL_PROVIDERS.includes(p));
+    return this.authApi.oAuthProviders;
   }
 
   get showRegister(): boolean {
     return !!this.oAuthProviders.length;
   }
 
+  private closeDialog(dialog): void {
+    this.currentUser$.pipe(
+      skipWhile(user => !user && !user.uid),
+      takeUntil(dialog.afterClosed())
+    ).subscribe(user => {
+      dialog.close();
+      this.showToast(`Welcome back, ${user.displayName}!`);
+    });
+  }
+
   private openOAuthDialog(): void {
-    this.dialog.open(LoginDialogComponent, { data: this.oAuthProviders });
+    const dialog = this.dialog.open(LoginDialogComponent, { data: this.oAuthProviders });
+    this.closeDialog(dialog);
   }
 
   private openRegisterDialog(): void {
-    this.dialog.open(RegisterDialogComponent, { data: this.manualProviders })
+    const dialog = this.dialog.open(RegisterDialogComponent, { data: this.manualProviders });
+    this.closeDialog(dialog);
   }
 
   login(): void {
@@ -56,7 +82,7 @@ export class AuthActionsComponent {
   }
 
   logout(): void {
-    this.authApi.logout();
+    this.store.dispatch(new Logout());
   }
 
 }
