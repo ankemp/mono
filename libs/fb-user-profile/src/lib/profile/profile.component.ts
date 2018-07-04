@@ -20,14 +20,24 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private authApi: AuthService,
     private profileApi: ProfileService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.isAuthUser$ = combineLatest(this.route.params, this.authApi.authState).pipe(
-      map(([params, authState]) => (authState !== null && params['uid'] === authState.uid)),
+    this.isAuthUser$ = combineLatest(
+      this.route.params,
+      this.authApi.authState
+    ).pipe(
+      map(
+        ([params, authState]) =>
+          authState !== null && params['uid'] === authState.uid
+      ),
       share()
     );
-    this.userProfile$ = combineLatest(this.route.params, this.authApi.authState, this.isAuthUser$).pipe(
+    this.userProfile$ = combineLatest(
+      this.route.params,
+      this.authApi.authState,
+      this.isAuthUser$
+    ).pipe(
       skipWhile(([, authState]) => !authState),
       switchMap(([params, authState, isAuthUser]) => {
         const publicProfile = this.profileApi.lookupProfile(params['uid']);
@@ -41,11 +51,10 @@ export class ProfileComponent implements OnInit {
     this.loading$ = this.userProfile$.pipe(
       map(profile => {
         if (Array.isArray(profile)) {
-          return (!!profile[0] && !!profile[1]);
+          return !!profile[0] && !!profile[1];
         }
         return !!profile;
       })
     );
   }
-
 }

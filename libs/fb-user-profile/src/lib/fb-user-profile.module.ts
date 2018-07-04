@@ -7,10 +7,11 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    UserProfileRoutingModule
-  ],
-  declarations: [ProfileComponent, PublicProfileComponent, ManageProfileComponent]
+  imports: [CommonModule, UserProfileRoutingModule],
+  declarations: [
+    ProfileComponent,
+    PublicProfileComponent,
+    ManageProfileComponent
+  ]
 })
-export class FbUserProfileModule { }
+export class FbUserProfileModule {}

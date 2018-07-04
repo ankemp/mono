@@ -5,7 +5,13 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 import { MenuItem } from '../../models';
-import { SNState, getSideNavMode, ToggleSideNav, getSideNavState, SetSmallScreen } from '@mono/ui-state';
+import {
+  SNState,
+  getSideNavMode,
+  ToggleSideNav,
+  getSideNavState,
+  SetSmallScreen
+} from '@mono/ui-state';
 
 @Component({
   selector: 'mono-top-nav',
@@ -28,18 +34,22 @@ export class TopNavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breakpointObserver.observe('(max-width: 786px)').pipe(
-      map((state: BreakpointState) => state.matches),
-      distinctUntilChanged()
-    ).subscribe(isSmallScreen => this.store.dispatch(new SetSmallScreen(isSmallScreen)))
+    this.breakpointObserver
+      .observe('(max-width: 786px)')
+      .pipe(
+        map((state: BreakpointState) => state.matches),
+        distinctUntilChanged()
+      )
+      .subscribe(isSmallScreen =>
+        this.store.dispatch(new SetSmallScreen(isSmallScreen))
+      );
   }
 
   toggleSidenav(): void {
-    this.store.dispatch(new ToggleSideNav);
+    this.store.dispatch(new ToggleSideNav());
   }
 
   get bottomNavExists(): boolean {
     return this.bottomNav.nativeElement.childElementCount > 0;
   }
-
 }

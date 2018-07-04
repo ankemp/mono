@@ -12,31 +12,36 @@ export enum NBActionTypes {
 export class AddBanner implements Action {
   readonly type = NBActionTypes.AddBanner;
 
-  constructor(public payload: Banner) { }
+  constructor(public payload: Banner) {}
 }
 
 export class RemoveBanner implements Action {
   readonly type = NBActionTypes.RemoveBanner;
 
-  constructor(public payload: string) { }
+  constructor(public payload: string) {}
 }
 
 export class SetBanner implements Action {
   readonly type = NBActionTypes.SetBanner;
 
-  constructor(public payload: string) { }
+  constructor(public payload: string) {}
 }
 
 export class DoBannerAction implements Action {
   readonly type = NBActionTypes.DoBannerAction;
 
-  constructor(public payload: Banner) { }
+  constructor(public payload: Banner) {}
 }
 
 export class DoBannerActionSuccess implements Action {
   readonly type = NBActionTypes.DoBannerActionSuccess;
 
-  constructor(public payload: string) { }
+  constructor(public payload: string) {}
 }
 
-export type NBActionsUnion = AddBanner | RemoveBanner | SetBanner | DoBannerAction | DoBannerActionSuccess;
+export type NBActionsUnion =
+  | AddBanner
+  | RemoveBanner
+  | SetBanner
+  | DoBannerAction
+  | DoBannerActionSuccess;

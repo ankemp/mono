@@ -4,4 +4,4 @@ import { FbUserProfileModule } from '@mono/fb-user-profile';
 @NgModule({
   imports: [FbUserProfileModule]
 })
-export class ProfileModule { }
+export class ProfileModule {}

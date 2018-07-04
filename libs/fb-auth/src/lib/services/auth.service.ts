@@ -8,10 +8,14 @@ import { Observable, throwError, of } from 'rxjs';
 import { AuthOptionsToken, AuthOptions } from '../config';
 import { AuthError } from '../state/auth.actions';
 
-const PROVIDER_NOT_ALLOWED = { code: 'auth/provider-not-allowed', message: 'The provider you are trying to authorize through is not allowed for this application.' };
+const PROVIDER_NOT_ALLOWED = {
+  code: 'auth/provider-not-allowed',
+  message:
+    'The provider you are trying to authorize through is not allowed for this application.'
+};
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
   private readonly _manualProviders = ['email', 'phone'];
@@ -30,10 +34,10 @@ export class AuthService {
 
   private get oAuthProvidersInstance(): any {
     return {
-      'google': new firebase.auth.GoogleAuthProvider(),
-      'facebook': new firebase.auth.FacebookAuthProvider(),
-      'twitter': new firebase.auth.TwitterAuthProvider(),
-      'github': new firebase.auth.GithubAuthProvider()
+      google: new firebase.auth.GoogleAuthProvider(),
+      facebook: new firebase.auth.FacebookAuthProvider(),
+      twitter: new firebase.auth.TwitterAuthProvider(),
+      github: new firebase.auth.GithubAuthProvider()
     };
   }
 
@@ -57,7 +61,10 @@ export class AuthService {
     return throwError(new AuthError(PROVIDER_NOT_ALLOWED));
   }
 
-  login(provider: string, { email, password }: { email: string, password: string }): Observable<any> {
+  login(
+    provider: string,
+    { email, password }: { email: string; password: string }
+  ): Observable<any> {
     if (this.checkProvider(provider)) {
       return of(this.afAuth.auth.signInWithEmailAndPassword(email, password));
     }
@@ -65,8 +72,13 @@ export class AuthService {
   }
 
   oAuthLogin(provider: string): Observable<any> {
-    if (this.checkProvider(provider) && !!this.oAuthProvidersInstance[provider]) {
-      return of(this.afAuth.auth.signInWithPopup(this.useOAuthProvider(provider)));
+    if (
+      this.checkProvider(provider) &&
+      !!this.oAuthProvidersInstance[provider]
+    ) {
+      return of(
+        this.afAuth.auth.signInWithPopup(this.useOAuthProvider(provider))
+      );
     }
     return this.providerNotAllowed;
   }
@@ -75,9 +87,14 @@ export class AuthService {
     return this.afAuth.auth.fetchSignInMethodsForEmail(email);
   }
 
-  register(provider: string, { email, password }: { email: string, password: string }): Observable<any> {
+  register(
+    provider: string,
+    { email, password }: { email: string; password: string }
+  ): Observable<any> {
     if (this.checkProvider(provider)) {
-      return of(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
+      return of(
+        this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      );
     }
     return this.providerNotAllowed;
   }

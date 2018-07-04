@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyD_GyLFLv9_Ar_36e9wrI0XDbxh6zduiz0",
-    authDomain: "mono-kitchen-sink.firebaseapp.com",
-    databaseURL: "https://mono-kitchen-sink.firebaseio.com",
-    projectId: "mono-kitchen-sink",
-    storageBucket: "",
-    messagingSenderId: "766031976497"
+    apiKey: 'AIzaSyD_GyLFLv9_Ar_36e9wrI0XDbxh6zduiz0',
+    authDomain: 'mono-kitchen-sink.firebaseapp.com',
+    databaseURL: 'https://mono-kitchen-sink.firebaseio.com',
+    projectId: 'mono-kitchen-sink',
+    storageBucket: '',
+    messagingSenderId: '766031976497'
   },
   auth: {
     providers: ['email', 'google']

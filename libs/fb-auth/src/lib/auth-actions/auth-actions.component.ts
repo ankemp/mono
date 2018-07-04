@@ -33,6 +33,7 @@ export class AuthActionsComponent {
     this.store.dispatch(new GetUser());
   }
 
+  // TODO: Move to ui state & create queue
   private showToast(message: string): void {
     this.snackBar.open(message, '', {
       duration: 3000,
@@ -54,22 +55,28 @@ export class AuthActionsComponent {
   }
 
   private closeDialog(dialog): void {
-    this.currentUser$.pipe(
-      skipWhile(user => !user && !user.uid),
-      takeUntil(dialog.afterClosed())
-    ).subscribe(user => {
-      dialog.close();
-      this.showToast(`Welcome back, ${user.displayName}!`);
-    });
+    this.currentUser$
+      .pipe(
+        skipWhile(user => !user && !user.uid),
+        takeUntil(dialog.afterClosed())
+      )
+      .subscribe(user => {
+        dialog.close();
+        this.showToast(`Welcome back, ${user.displayName}!`);
+      });
   }
 
   private openOAuthDialog(): void {
-    const dialog = this.dialog.open(LoginDialogComponent, { data: this.oAuthProviders });
+    const dialog = this.dialog.open(LoginDialogComponent, {
+      data: this.oAuthProviders
+    });
     this.closeDialog(dialog);
   }
 
   private openRegisterDialog(): void {
-    const dialog = this.dialog.open(RegisterDialogComponent, { data: this.manualProviders });
+    const dialog = this.dialog.open(RegisterDialogComponent, {
+      data: this.manualProviders
+    });
     this.closeDialog(dialog);
   }
 
@@ -84,5 +91,4 @@ export class AuthActionsComponent {
   logout(): void {
     this.store.dispatch(new Logout());
   }
-
 }

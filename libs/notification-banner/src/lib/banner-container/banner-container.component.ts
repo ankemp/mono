@@ -12,10 +12,7 @@ import { Banner, NBState, getTopBanner } from '@mono/ui-state';
 export class BannerContainerComponent {
   banner$: Observable<Banner>;
 
-  constructor(
-    store: Store<NBState>
-  ) {
+  constructor(store: Store<NBState>) {
     this.banner$ = store.pipe(select(getTopBanner));
   }
-
 }

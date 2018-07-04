@@ -5,4 +5,4 @@ import { BottomNavModule } from './bottom-nav.module';
 @NgModule({
   exports: [TopNavModule, BottomNavModule]
 })
-export class NavigationModule { }
+export class NavigationModule {}

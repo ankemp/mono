@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input
+} from '@angular/core';
 
 @Component({
   selector: 'mono-public-profile',
@@ -9,8 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class PublicProfileComponent implements OnInit {
   @Input() userProfile: any;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
-
+  ngOnInit() {}
 }

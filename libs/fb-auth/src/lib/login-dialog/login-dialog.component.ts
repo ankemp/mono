@@ -1,5 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl
+} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
 
@@ -20,7 +26,7 @@ export class LoginDialogComponent implements OnInit {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<LoginDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public providers: string[]
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({});
@@ -54,7 +60,9 @@ export class LoginDialogComponent implements OnInit {
     if (this.form.valid && this.loginWith === 'email') {
       const email = this.email.value as string;
       const password = this.password.value as string;
-      this.store.dispatch(new Login({ provider: this.loginWith, email, password }));
+      this.store.dispatch(
+        new Login({ provider: this.loginWith, email, password })
+      );
       // this.authApi.login('email', { email, password }).then(_ => {
       //   this.dialogRef.close();
       // }).catch(error => {
@@ -71,5 +79,4 @@ export class LoginDialogComponent implements OnInit {
     //   this.showToast(error.message);
     // });
   }
-
 }

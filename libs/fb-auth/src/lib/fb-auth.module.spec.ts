@@ -5,8 +5,7 @@ describe('FbAuthModule', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FbAuthModule]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   it('should create', () => {

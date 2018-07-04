@@ -3,12 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ProfileComponent } from './profile/profile.component';
 
-const routes: Routes = [
-  { path: ':uid', component: ProfileComponent }
-];
+const routes: Routes = [{ path: ':uid', component: ProfileComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserProfileRoutingModule { }
+export class UserProfileRoutingModule {}

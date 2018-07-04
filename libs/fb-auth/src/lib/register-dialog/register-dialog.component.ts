@@ -1,5 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl
+} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Store } from '@ngrx/store';
 
@@ -23,7 +29,7 @@ export class RegisterDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public providers: string[],
     private snackBar: MatSnackBar,
     private authApi: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({});
@@ -40,8 +46,15 @@ export class RegisterDialogComponent implements OnInit {
 
   private withEmail(): void {
     this.form = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.email], AuthValidators.email(this.authApi)),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)])
+      email: new FormControl(
+        '',
+        [Validators.required, Validators.email],
+        AuthValidators.email(this.authApi)
+      ),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8)
+      ])
     });
     this.registerWith = 'email';
   }
@@ -82,5 +95,4 @@ export class RegisterDialogComponent implements OnInit {
       // })
     }
   }
-
 }

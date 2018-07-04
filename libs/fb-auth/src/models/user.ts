@@ -11,5 +11,5 @@ export class User implements IUser {
     public displayName: string,
     public email: string = null,
     public uid: string = null
-  ) { }
+  ) {}
 }

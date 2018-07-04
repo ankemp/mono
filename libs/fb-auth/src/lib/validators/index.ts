@@ -9,7 +9,7 @@ export class AuthValidators {
         debounceTime(300),
         switchMap(email => authApi.checkEmail(email)),
         take(1),
-        map(providers => providers.length ? { used: true } : null)
+        map(providers => (providers.length ? { used: true } : null))
       );
     };
   }

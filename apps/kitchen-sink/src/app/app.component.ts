@@ -15,5 +15,5 @@ export class AppComponent {
     { name: 'Groups', route: '/', icon: 'group' }
   ];
 
-  constructor() { }
+  constructor() {}
 }

@@ -5,17 +5,22 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 
 import { AuthService } from '../services/auth.service';
-import { AuthActionTypes, GetUser, Authenticated, NotAuthenticated, AuthError, OAuthLogin, Login } from './auth.actions';
+import {
+  AuthActionTypes,
+  GetUser,
+  Authenticated,
+  NotAuthenticated,
+  AuthError,
+  OAuthLogin,
+  Login
+} from './auth.actions';
 import { User } from '../../models';
 
 @Injectable()
 export class AuthEffects {
   public providers: Array<string>;
 
-  constructor(
-    private actions$: Actions,
-    private authApi: AuthService
-  ) { }
+  constructor(private actions$: Actions, private authApi: AuthService) {}
 
   @Effect()
   getUser$: Observable<Action> = this.actions$.pipe(
@@ -23,7 +28,11 @@ export class AuthEffects {
     switchMap(_ => this.authApi.authState),
     map(authState => {
       if (authState) {
-        const user = new User(authState.displayName, authState.email, authState.uid);
+        const user = new User(
+          authState.displayName,
+          authState.email,
+          authState.uid
+        );
         return new Authenticated(user);
       }
       return new NotAuthenticated();

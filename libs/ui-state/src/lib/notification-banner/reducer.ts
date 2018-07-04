@@ -11,13 +11,16 @@ const initialState: State = {
   activeBanner: ''
 };
 
-export function reducer(state: State = initialState, action: NBActionsUnion): State {
+export function reducer(
+  state: State = initialState,
+  action: NBActionsUnion
+): State {
   switch (action.type) {
     case NBActionTypes.AddBanner: {
       return {
         ...state,
         banners: [...state.banners, action.payload]
-      }
+      };
     }
 
     case NBActionTypes.RemoveBanner:
@@ -25,14 +28,14 @@ export function reducer(state: State = initialState, action: NBActionsUnion): St
       return {
         ...state,
         banners: state.banners.filter(({ id }) => id !== action.payload)
-      }
+      };
     }
 
     case NBActionTypes.SetBanner: {
       return {
         ...state,
         activeBanner: action.payload
-      }
+      };
     }
 
     default: {
@@ -41,5 +44,7 @@ export function reducer(state: State = initialState, action: NBActionsUnion): St
   }
 }
 
-export const getActiveBanner = (state: State) => state.banners.find(b => b.id === state.activeBanner);
-export const getTopBanner = (state: State) => state.banners.sort((a, b) => a.index - b.index)[0];
+export const getActiveBanner = (state: State) =>
+  state.banners.find(b => b.id === state.activeBanner);
+export const getTopBanner = (state: State) =>
+  state.banners.sort((a, b) => a.index - b.index)[0];

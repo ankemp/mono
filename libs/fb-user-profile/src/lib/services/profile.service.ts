@@ -9,20 +9,16 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProfileService {
-
-  constructor(
-    private afs: AngularFirestore,
-    private authApi: AuthService
-  ) { }
+  constructor(private afs: AngularFirestore, private authApi: AuthService) {}
 
   lookupProfile(uid: string): Observable<any> {
-    return this.afs.doc<any>(`profiles/${uid}`).valueChanges().pipe(
-      switchMap(profile => !!profile ? empty() : of(profile))
-    )
+    return this.afs
+      .doc<any>(`profiles/${uid}`)
+      .valueChanges()
+      .pipe(switchMap(profile => (!!profile ? empty() : of(profile))));
   }
 
   updateProfile(uid: string, profile): Promise<any> {
     return this.afs.doc<any>(`profiles/${uid}`).set(profile);
   }
-
 }

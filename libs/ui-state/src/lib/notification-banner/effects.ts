@@ -4,11 +4,15 @@ import { Action } from '@ngrx/store';
 
 import { Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { NBActionTypes, DoBannerAction, DoBannerActionSuccess } from './actions';
+import {
+  NBActionTypes,
+  DoBannerAction,
+  DoBannerActionSuccess
+} from './actions';
 
 @Injectable()
 export class NotificationBannerEffects {
-  constructor(private actions$: Actions) { }
+  constructor(private actions$: Actions) {}
 
   @Effect()
   doBannerAction$: Observable<Action> = this.actions$.pipe(
@@ -18,5 +22,5 @@ export class NotificationBannerEffects {
       banner.action();
       return of(new DoBannerActionSuccess(banner.id));
     })
-  )
+  );
 }

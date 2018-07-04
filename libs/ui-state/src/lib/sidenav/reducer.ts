@@ -20,14 +20,14 @@ export function reducer(state: State = initialState, action: SNActionsUnion) {
         isSmallScreen: action.payload,
         menuMode: action.payload ? 'over' : 'side',
         showSideNav: !action.payload
-      }
+      };
     }
 
     case SNActionTypes.ToggleSideNav: {
       return {
         ...state,
         showSideNav: !state.showSideNav
-      }
+      };
     }
 
     default: {

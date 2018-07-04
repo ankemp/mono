@@ -6,12 +6,8 @@ import { BannerContainerComponent } from './banner-container/banner-container.co
 import { NotificationBannerComponent } from './notification-banner/notification-banner.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatToolbarModule
-  ],
+  imports: [CommonModule, MatButtonModule, MatToolbarModule],
   declarations: [BannerContainerComponent, NotificationBannerComponent],
   exports: [BannerContainerComponent]
 })
-export class NotificationBannerModule { }
+export class NotificationBannerModule {}

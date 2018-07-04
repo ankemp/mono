@@ -18,7 +18,7 @@ export class GetUser implements Action {
 export class Authenticated implements Action {
   readonly type = AuthActionTypes.Authenticated;
 
-  constructor(public payload: User) { }
+  constructor(public payload: User) {}
 }
 
 export class NotAuthenticated implements Action {
@@ -28,13 +28,13 @@ export class NotAuthenticated implements Action {
 export class OAuthLogin implements Action {
   readonly type = AuthActionTypes.OAuthLogin;
 
-  constructor(public payload: string) { }
+  constructor(public payload: string) {}
 }
 
 export class Login implements Action {
   readonly type = AuthActionTypes.Login;
 
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class Logout implements Action {
@@ -44,10 +44,11 @@ export class Logout implements Action {
 export class AuthError implements Action {
   readonly type = AuthActionTypes.AuthError;
 
-  constructor(public payload?: any) { }
+  constructor(public payload?: any) {}
 }
 
-export type AuthActionsUnion = GetUser
+export type AuthActionsUnion =
+  | GetUser
   | Authenticated
   | NotAuthenticated
   | OAuthLogin

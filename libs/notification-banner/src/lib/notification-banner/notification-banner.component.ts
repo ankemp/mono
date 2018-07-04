@@ -12,12 +12,9 @@ import { Banner, NBState, DoBannerAction } from '@mono/ui-state';
 export class NotificationBannerComponent {
   @Input() banner: Banner;
 
-  constructor(
-    private store: Store<NBState>
-  ) { }
+  constructor(private store: Store<NBState>) {}
 
   doBannerAction(): void {
     this.store.dispatch(new DoBannerAction(this.banner));
   }
-
 }

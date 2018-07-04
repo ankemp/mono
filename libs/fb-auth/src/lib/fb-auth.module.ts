@@ -39,16 +39,19 @@ import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
     NgStringPipesModule
   ],
   entryComponents: [LoginDialogComponent, RegisterDialogComponent],
-  declarations: [AuthActionsComponent, LoginDialogComponent, RegisterDialogComponent, UserDropdownComponent],
+  declarations: [
+    AuthActionsComponent,
+    LoginDialogComponent,
+    RegisterDialogComponent,
+    UserDropdownComponent
+  ],
   exports: [AuthActionsComponent]
 })
 export class FbAuthModule {
   static config(options: AuthOptions): ModuleWithProviders {
     return {
       ngModule: FbAuthModule,
-      providers: [
-        { provide: AuthOptionsToken, useValue: options }
-      ]
-    }
+      providers: [{ provide: AuthOptionsToken, useValue: options }]
+    };
   }
 }

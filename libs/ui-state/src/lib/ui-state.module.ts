@@ -10,7 +10,7 @@ import { NotificationBannerEffects } from './notification-banner/effects';
   imports: [
     CommonModule,
     StoreModule.forFeature('ui', reducers),
-    EffectsModule.forFeature([NotificationBannerEffects]),
+    EffectsModule.forFeature([NotificationBannerEffects])
   ]
 })
-export class UiStateModule { }
+export class UiStateModule {}

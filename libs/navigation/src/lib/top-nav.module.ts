@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatListModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -20,4 +26,4 @@ import { TopNavComponent } from './top-nav/top-nav.component';
   declarations: [TopNavComponent],
   exports: [TopNavComponent]
 })
-export class TopNavModule { }
+export class TopNavModule {}
