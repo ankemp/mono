@@ -47,7 +47,7 @@ export class ManageProfileComponent implements OnInit, OnDestroy {
         index: 0,
         desc: "Looks like your profile isn't public.",
         buttonText: 'Make Public',
-        action: () => this.makePublic,
+        action: this.makePublic,
         color: 'accent'
       };
       this.store.dispatch(new AddBanner(banner));
