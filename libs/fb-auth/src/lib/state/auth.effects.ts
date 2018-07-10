@@ -71,7 +71,11 @@ export class AuthEffects {
     ofType(AuthActionTypes.Authenticated),
     map((action: Authenticated) => action.payload),
     map(
-      user => new AddSnackBar({ message: `Welcome back, ${user.displayName}` })
+      user =>
+        new AddSnackBar({
+          message: `Welcome back, ${user.displayName}`,
+          priority: 0
+        })
     )
   );
 

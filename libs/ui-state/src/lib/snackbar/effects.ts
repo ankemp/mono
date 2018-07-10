@@ -29,7 +29,7 @@ export class SnackBarEffects {
   add$: Observable<Action> = this.actions$.pipe(
     ofType(SBActionTypes.Add),
     map((action: AddSnackBar) => action.payload),
-    map(sb => new SnackBar(sb.message, sb.action, sb.config, sb.index)),
+    map(sb => new SnackBar(sb.message, sb.action, sb.config, sb.priority)),
     switchMap(sb => of(new AddSnackBarSuccess(sb)))
   );
 

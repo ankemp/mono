@@ -16,7 +16,12 @@ export function reducer(state: State = initialState, action: SBActionsUnion) {
     case SBActionTypes.AddSuccess: {
       return {
         ...state,
-        bars: [...state.bars, action.payload].sort((a, b) => a.index - b.index)
+        bars: [...state.bars, action.payload].sort((a, b) => {
+          if (a.priority !== b.priority) {
+            return a.priority - b.priority;
+          }
+          return b.timestamp - a.timestamp;
+        })
       };
     }
 
