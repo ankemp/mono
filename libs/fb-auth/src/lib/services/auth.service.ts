@@ -4,7 +4,7 @@ import { firebase } from '@firebase/app';
 import { User, AuthProvider } from '@firebase/auth-types';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError, from } from 'rxjs';
 import { AuthOptionsToken, AuthOptions } from '../config';
 import { AuthError } from '../state/auth.actions';
 
@@ -64,42 +64,42 @@ export class AuthService {
   login(
     provider: string,
     { email, password }: { email: string; password: string }
-  ): Observable<any> {
+  ): Observable<firebase.auth.UserCredential> {
     if (this.checkProvider(provider)) {
-      return of(this.afAuth.auth.signInWithEmailAndPassword(email, password));
+      return from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
     }
     return this.providerNotAllowed;
   }
 
-  oAuthLogin(provider: string): Observable<any> {
+  oAuthLogin(provider: string): Observable<firebase.auth.UserCredential> {
     if (
       this.checkProvider(provider) &&
       !!this.oAuthProvidersInstance[provider]
     ) {
-      return of(
+      return from(
         this.afAuth.auth.signInWithPopup(this.useOAuthProvider(provider))
       );
     }
     return this.providerNotAllowed;
   }
 
-  checkEmail(email: string) {
-    return this.afAuth.auth.fetchSignInMethodsForEmail(email);
+  checkEmail(email: string): Observable<string[]> {
+    return from(this.afAuth.auth.fetchSignInMethodsForEmail(email));
   }
 
   register(
     provider: string,
     { email, password }: { email: string; password: string }
-  ): Observable<any> {
+  ): Observable<firebase.auth.UserCredential> {
     if (this.checkProvider(provider)) {
-      return of(
+      return from(
         this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       );
     }
     return this.providerNotAllowed;
   }
 
-  logout(): Observable<any> {
-    return of(this.afAuth.auth.signOut());
+  logout(): Observable<void> {
+    return from(this.afAuth.auth.signOut());
   }
 }

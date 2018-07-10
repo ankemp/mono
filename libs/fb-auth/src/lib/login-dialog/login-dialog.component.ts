@@ -63,20 +63,10 @@ export class LoginDialogComponent implements OnInit {
       this.store.dispatch(
         new Login({ provider: this.loginWith, email, password })
       );
-      // this.authApi.login('email', { email, password }).then(_ => {
-      //   this.dialogRef.close();
-      // }).catch(error => {
-      //   this.showToast(error.message);
-      // })
     }
   }
 
   selectProvider(provider: string): void {
     this.store.dispatch(new OAuthLogin(provider));
-    // this.authApi.oAuthLogin(provider).then(_ => {
-    //   this.dialogRef.close();
-    // }).catch(error => {
-    //   this.showToast(error.message);
-    // });
   }
 }
