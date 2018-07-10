@@ -15,6 +15,7 @@ import {
   Login
 } from './auth.actions';
 import { User } from '../../models';
+import { AddSnackBar } from '@mono/ui-state';
 
 @Injectable()
 export class AuthEffects {
@@ -63,5 +64,21 @@ export class AuthEffects {
     switchMap(_ => this.authApi.logout()),
     map(_ => new NotAuthenticated()),
     catchError(err => of(new AuthError(err)))
+  );
+
+  @Effect()
+  authenticated$: Observable<Action> = this.actions$.pipe(
+    ofType(AuthActionTypes.Authenticated),
+    map((action: Authenticated) => action.payload),
+    map(
+      user => new AddSnackBar({ message: `Welcome back, ${user.displayName}` })
+    )
+  );
+
+  @Effect()
+  error$: Observable<Action> = this.actions$.pipe(
+    ofType(AuthActionTypes.AuthError),
+    map((action: AuthError) => action.payload),
+    map(({ message }) => new AddSnackBar({ message }))
   );
 }

@@ -16,8 +16,8 @@ export class NotificationBannerEffects {
 
   @Effect()
   doBannerAction$: Observable<Action> = this.actions$.pipe(
-    ofType<DoBannerAction>(NBActionTypes.DoBannerAction),
-    map(action => action.payload),
+    ofType(NBActionTypes.DoBannerAction),
+    map((action: DoBannerAction) => action.payload),
     mergeMap(banner => {
       banner.action();
       return of(new DoBannerActionSuccess(banner.id));

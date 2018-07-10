@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -10,6 +10,7 @@ import { RegisterDialogComponent } from '../register-dialog/register-dialog.comp
 import { State } from '../state/auth.reducer';
 import { getCurrentUser } from '../state';
 import { Logout, GetUser } from '../state/auth.actions';
+import { AddSnackBar } from '@mono/ui-state';
 import { User } from '../../models';
 
 @Component({
@@ -23,23 +24,13 @@ export class AuthActionsComponent {
   constructor(
     private store: Store<State>,
     private authApi: AuthService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private dialog: MatDialog
   ) {
     this.currentUser$ = store.pipe(
       select(getCurrentUser),
       skipWhile(user => !user.uid)
     );
     this.store.dispatch(new GetUser());
-  }
-
-  // TODO: Move to ui state & create queue
-  private showToast(message: string): void {
-    this.snackBar.open(message, '', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-    });
   }
 
   get manualProviders(): string[] {
@@ -62,7 +53,6 @@ export class AuthActionsComponent {
       )
       .subscribe(user => {
         dialog.close();
-        this.showToast(`Welcome back, ${user.displayName}!`);
       });
   }
 
