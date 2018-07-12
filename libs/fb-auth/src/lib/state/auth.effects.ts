@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
+
+import { Observable, of, throwError, combineLatest } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 
+import { ProfileService } from '@mono/fb-user-profile';
 import { AuthService } from '../services/auth.service';
 import {
   AuthActionTypes,
@@ -14,25 +16,42 @@ import {
   OAuthLogin,
   Login
 } from './auth.actions';
-import { User } from '../../models';
 import { AddSnackBar } from '@mono/ui-state';
+import { User } from '../../models';
 
 @Injectable()
 export class AuthEffects {
   public providers: Array<string>;
 
-  constructor(private actions$: Actions, private authApi: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authApi: AuthService,
+    private profileApi: ProfileService
+  ) {}
 
   @Effect()
   getUser$: Observable<Action> = this.actions$.pipe(
     ofType(AuthActionTypes.GetUser),
     switchMap(_ => this.authApi.authState),
-    map(authState => {
+    switchMap(authState => {
+      if (authState) {
+        return combineLatest(
+          of(authState),
+          this.profileApi.lookupProfile(authState.uid)
+        );
+      }
+      return throwError({
+        code: 'no-user-authenticated',
+        message: 'No User Authenticated'
+      });
+    }),
+    map(([authState, profile]: Array<any>) => {
       if (authState) {
         const user = new User(
           authState.displayName,
+          authState.uid,
           authState.email,
-          authState.uid
+          profile
         );
         return new Authenticated(user);
       }
@@ -66,7 +85,7 @@ export class AuthEffects {
     catchError(err => of(new AuthError(err)))
   );
 
-  @Effect()
+  @Effect({ dispatch: false })
   authenticated$: Observable<Action> = this.actions$.pipe(
     ofType(AuthActionTypes.Authenticated),
     map((action: Authenticated) => action.payload),

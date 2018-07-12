@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from 'angularfire2/firestore';
-import { AuthService } from '@mono/fb-auth';
 import { Observable, of, empty } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -9,9 +8,9 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProfileService {
-  constructor(private afs: AngularFirestore, private authApi: AuthService) {}
+  constructor(private afs: AngularFirestore) {}
 
-  lookupProfile(uid: string): Observable<any> {
+  lookupProfile(uid: string): Observable<{ [key: string]: any }> {
     return this.afs
       .doc<any>(`profiles/${uid}`)
       .valueChanges()
