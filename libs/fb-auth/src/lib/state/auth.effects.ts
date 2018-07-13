@@ -20,7 +20,7 @@ import { User } from '../../models';
 
 @Injectable()
 export class AuthEffects {
-  public providers: Array<string>;
+  public providers: string[];
 
   constructor(
     private actions$: Actions,
