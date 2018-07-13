@@ -5,8 +5,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable, of, throwError, combineLatest } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 
-import { ProfileService } from '@mono/fb-user-profile';
-import { AuthService } from '../services/auth.service';
+import { AuthService, ProfileService } from '../services';
 import {
   AuthActionTypes,
   GetUser,
