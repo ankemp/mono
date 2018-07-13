@@ -1,1 +1,9 @@
 <h1>Manage Account</h1>
+<mat-tab-group mat-stretch-tabs>
+  <mat-tab label="Profile">
+    Show profile fields here (injected from app)
+  </mat-tab>
+  <mat-tab label="Account">
+    <mono-account-details-form [accountDetails]="authProfile$ | async"></mono-account-details-form>
+  </mat-tab>
+</mat-tab-group>

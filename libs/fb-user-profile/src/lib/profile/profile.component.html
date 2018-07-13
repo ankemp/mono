@@ -1,6 +1,6 @@
 <div *ngIf="!(loading$ | async)">
-  <mono-manage-profile *ngIf="isAuthUser$ | async; else showPublicProfile" [userProfile]="userProfile$"></mono-manage-profile>
+  <mono-manage-profile *ngIf="isAuthUser$ | async; else showPublicProfile" [userProfile]="authProfile$"></mono-manage-profile>
   <ng-template #showPublicProfile>
-    <mono-public-profile *ngIf="(userProfile$ | async)" [userProfile]="userProfile$ | async"></mono-public-profile>
+    <!-- <mono-public-profile *ngIf="(userProfile$ | async)" [userProfile]="userProfile$ | async"></mono-public-profile> -->
   </ng-template>
 </div>

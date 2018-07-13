@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { Observable, empty } from 'rxjs';
-import { map, withLatestFrom, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { User } from '@firebase/auth-types';
 import { Banner, NBState, AddBanner, RemoveBanner } from '@mono/ui-state';
-import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'mono-manage-profile',
@@ -17,10 +16,7 @@ export class ManageProfileComponent implements OnInit, OnDestroy {
   authProfile$: Observable<User>;
   publicProfile$: Observable<any>;
 
-  constructor(
-    private store: Store<NBState>,
-    private profileApi: ProfileService
-  ) {}
+  constructor(private store: Store<NBState>) {}
 
   ngOnInit() {
     this.authProfile$ = this.userProfile.pipe(
