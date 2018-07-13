@@ -47,7 +47,7 @@
     "core-js": "^2.5.4",
     "firebase": "^5.0.4",
     "ngrx-store-freeze": "^0.2.4",
-    "ngx-pipes": "^2.2.0",
+    "ngx-pipes": "^2.3.2",
     "normalize.css": "^8.0.0",
     "rxjs": "^6.2.1",
     "zone.js": "^0.8.26"

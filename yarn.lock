@@ -4837,9 +4837,11 @@ ngrx-store-freeze@^0.2.4:
   dependencies:
     deep-freeze-strict "^1.1.1"
 
-ngx-pipes@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/ngx-pipes/-/ngx-pipes-2.2.0.tgz#5d4a3133de02f14c324e389160c9eb0f0a3806d9"
+ngx-pipes@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/ngx-pipes/-/ngx-pipes-2.3.2.tgz#00081e10a20b01afd4ab418b41a493b570348d70"
+  dependencies:
+    tslib "^1.9.0"
 
 no-case@^2.2.0:
   version "2.3.2"
