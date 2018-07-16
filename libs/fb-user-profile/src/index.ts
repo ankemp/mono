@@ -1,2 +1,2 @@
 export * from './lib/fb-user-profile.module';
-export * from './lib/state/profile.actions';
+export * from './lib/state';

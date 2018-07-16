@@ -1,12 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
-
 import { firebase } from '@firebase/app';
 import { User, AuthProvider } from '@firebase/auth-types';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Observable, throwError, from } from 'rxjs';
+
 import { AuthOptionsToken, AuthOptions } from '../config';
-import { AuthError } from '../state/auth.actions';
+import { AuthError } from '../state';
 
 const PROVIDER_NOT_ALLOWED = {
   code: 'auth/provider-not-allowed',

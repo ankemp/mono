@@ -9,8 +9,7 @@ import {
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
 
-import { OAuthLogin, Login } from '../state/auth.actions';
-import { State } from '../state/auth.reducer';
+import { AuthState, OAuthLogin, Login } from '../state';
 
 @Component({
   selector: 'mono-login-dialog',
@@ -22,7 +21,7 @@ export class LoginDialogComponent implements OnInit {
   loginWith = 'email';
 
   constructor(
-    private store: Store<State>,
+    private store: Store<AuthState>,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<LoginDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public providers: string[]

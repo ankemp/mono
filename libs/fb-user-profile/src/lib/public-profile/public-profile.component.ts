@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { getCurrentProfile } from '../state/profile.selectors';
+import { getCurrentProfile } from '../state';
 
 @Component({
   selector: 'mono-public-profile',

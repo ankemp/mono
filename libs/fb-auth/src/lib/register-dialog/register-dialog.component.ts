@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 
 import { AuthService } from '../services/auth.service';
 import { AuthValidators } from '../validators';
-import { State } from '../state/auth.reducer';
+import { AuthState } from '../state';
 
 @Component({
   selector: 'mono-register-dialog',
@@ -23,7 +23,7 @@ export class RegisterDialogComponent implements OnInit {
   registerWith: string;
 
   constructor(
-    private store: Store<State>,
+    private store: Store<AuthState>,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegisterDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public providers: string[],

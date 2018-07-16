@@ -1,6 +1,8 @@
 import { AbstractControl } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+
 import { switchMap, map, take, debounceTime } from 'rxjs/operators';
+
+import { AuthService } from '../services/auth.service';
 
 export class AuthValidators {
   static email(authApi: AuthService) {

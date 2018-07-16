@@ -4,13 +4,13 @@ import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { takeUntil, skipWhile } from 'rxjs/operators';
+
 import { AuthService } from '../services/auth.service';
+import { AuthState, getCurrentUser, Logout, GetUser } from '../state';
+import { User } from '../../models';
+
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
-import { State } from '../state/auth.reducer';
-import { getCurrentUser } from '../state';
-import { Logout, GetUser } from '../state/auth.actions';
-import { User } from '../../models';
 
 @Component({
   selector: 'mono-auth-actions',
@@ -21,7 +21,7 @@ export class AuthActionsComponent {
   currentUser$: Observable<User>;
 
   constructor(
-    private store: Store<State>,
+    private store: Store<AuthState>,
     private authApi: AuthService,
     private dialog: MatDialog
   ) {

@@ -6,7 +6,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { User } from '@firebase/auth-types';
+import { User } from '../../models';
 
 @Component({
   selector: 'mono-user-dropdown',

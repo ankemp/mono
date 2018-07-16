@@ -1,10 +1,3 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { State, isAuthLoading } from './auth.reducer';
-
-export const getAuthState = createFeatureSelector<State>('auth');
-export const getCurrentUser = createSelector(getAuthState, state => state);
-export const getCurrentUserProfile = createSelector(
-  getCurrentUser,
-  user => user.profile
-);
-export const getIsAuthLoading = createSelector(getAuthState, isAuthLoading);
+export * from './auth.actions';
+export { State as AuthState } from './auth.reducer';
+export * from './auth.selectors';

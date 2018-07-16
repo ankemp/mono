@@ -70,7 +70,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.OAuthLogin),
     map((action: OAuthLogin) => action.payload),
     switchMap(provider => this.authApi.oAuthLogin(provider)),
-    map(_ => new GetUser()),
+    switchMap(_ => of(new GetUser())),
     catchError(err => of(new AuthError(err)))
   );
 
@@ -78,7 +78,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.Login),
     map((action: Login) => action.payload),
     switchMap(payload => this.authApi.login(payload.provider, { ...payload })),
-    map(_ => new GetUser()),
+    switchMap(_ => of(new GetUser())),
     catchError(err => of(new AuthError(err)))
   );
 
@@ -86,7 +86,7 @@ export class AuthEffects {
   logout$: Observable<Action> = this.actions$.pipe(
     ofType(AuthActionTypes.Logout),
     switchMap(_ => this.authApi.logout()),
-    map(_ => new NotAuthenticated()),
+    switchMap(_ => of(new NotAuthenticated())),
     catchError(err => of(new AuthError(err)))
   );
 

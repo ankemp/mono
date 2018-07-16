@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   map,
   pairwise,
@@ -15,6 +15,7 @@ import {
   distinctUntilChanged,
   tap
 } from 'rxjs/operators';
+
 import { WindowRef } from '../window-ref.service';
 import { MenuItem } from '../../models';
 

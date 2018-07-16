@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { map, distinctUntilChanged } from 'rxjs/operators';
-import { MenuItem } from '../../models';
+
 import {
   SNState,
   getSideNavMode,
@@ -12,6 +12,7 @@ import {
   getSideNavState,
   SetSmallScreen
 } from '@mono/ui-state';
+import { MenuItem } from '../../models';
 
 @Component({
   selector: 'mono-top-nav',

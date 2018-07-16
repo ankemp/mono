@@ -4,6 +4,7 @@ import { Action } from '@ngrx/store';
 
 import { Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
+
 import {
   NBActionTypes,
   DoBannerAction,
