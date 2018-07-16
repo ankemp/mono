@@ -45,16 +45,22 @@ export class AuthEffects {
       });
     }),
     map(([authState, profile]: Array<any>) => {
+      let user: User;
       if (authState) {
-        const user = new User(
+        user = new User(
           authState.displayName,
           authState.uid,
           authState.email,
           profile
         );
-        return new Authenticated(user);
       }
-      return new NotAuthenticated();
+      return user;
+    }),
+    switchMap(user => {
+      if (!!user) {
+        return of(new Authenticated(user));
+      }
+      return of(new NotAuthenticated());
     }),
     catchError(err => of(new AuthError(err)))
   );
@@ -84,16 +90,17 @@ export class AuthEffects {
     catchError(err => of(new AuthError(err)))
   );
 
-  @Effect({ dispatch: false })
+  @Effect()
   authenticated$: Observable<Action> = this.actions$.pipe(
     ofType(AuthActionTypes.Authenticated),
     map((action: Authenticated) => action.payload),
-    map(
-      user =>
+    switchMap(user =>
+      of(
         new AddSnackBar({
           message: `Welcome back, ${user.displayName}`,
           priority: 0
         })
+      )
     )
   );
 
@@ -101,6 +108,6 @@ export class AuthEffects {
   error$: Observable<Action> = this.actions$.pipe(
     ofType(AuthActionTypes.AuthError),
     map((action: AuthError) => action.payload),
-    map(({ message }) => new AddSnackBar({ message }))
+    switchMap(({ message }) => of(new AddSnackBar({ message })))
   );
 }

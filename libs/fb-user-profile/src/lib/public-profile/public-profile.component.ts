@@ -1,20 +1,19 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input
-} from '@angular/core';
+import { Component } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+
+import { getCurrentProfile } from '../state/profile.selectors';
 
 @Component({
   selector: 'mono-public-profile',
   templateUrl: './public-profile.component.html',
-  styleUrls: ['./public-profile.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./public-profile.component.css']
 })
-export class PublicProfileComponent implements OnInit {
-  @Input() userProfile: any;
+export class PublicProfileComponent {
+  profile$: Observable<any>;
 
-  constructor() {}
-
-  ngOnInit() {}
+  constructor(private store: Store<any>) {
+    this.profile$ = this.store.pipe(select(getCurrentProfile));
+  }
 }

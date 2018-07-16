@@ -10,13 +10,6 @@ export class User implements IUser {
     public displayName: string,
     public uid: string = null,
     public email: string = null,
-    private profile?: { [key: string]: any }
-  ) {
-    if (!!profile) {
-      Object.keys(profile).forEach(v => {
-        this[v] = profile[v];
-      });
-      this.profile = undefined;
-    }
-  }
+    public profile?: { [key: string]: any }
+  ) {}
 }

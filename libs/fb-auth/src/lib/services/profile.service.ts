@@ -14,7 +14,14 @@ export class ProfileService {
     return this.afs
       .doc<any>(`profiles/${uid}`)
       .valueChanges()
-      .pipe(switchMap(profile => (!!profile ? empty() : of(profile))));
+      .pipe(
+        switchMap(profile => {
+          if (!profile) {
+            this.afs.doc(`profiles/${uid}`).set({ uid, public: false });
+          }
+          return of(profile);
+        })
+      );
   }
 
   updateProfile(uid: string, profile): Promise<any> {

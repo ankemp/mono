@@ -10,7 +10,6 @@ import { RegisterDialogComponent } from '../register-dialog/register-dialog.comp
 import { State } from '../state/auth.reducer';
 import { getCurrentUser } from '../state';
 import { Logout, GetUser } from '../state/auth.actions';
-import { AddSnackBar } from '@mono/ui-state';
 import { User } from '../../models';
 
 @Component({

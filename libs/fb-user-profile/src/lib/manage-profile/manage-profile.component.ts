@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from '@firebase/auth-types';
-import { Banner, NBState, AddBanner, RemoveBanner } from '@mono/ui-state';
+import { tap } from 'rxjs/operators';
+
+import { User, getCurrentUser, getIsAuthLoading } from '@mono/fb-auth';
+import { Banner, AddBanner, RemoveBanner } from '@mono/ui-state';
 
 @Component({
   selector: 'mono-manage-profile',
@@ -12,42 +13,31 @@ import { Banner, NBState, AddBanner, RemoveBanner } from '@mono/ui-state';
   styleUrls: ['./manage-profile.component.css']
 })
 export class ManageProfileComponent implements OnInit, OnDestroy {
-  @Input() private userProfile: Observable<any[]>;
   authProfile$: Observable<User>;
-  publicProfile$: Observable<any>;
+  loading$: Observable<boolean>;
 
-  constructor(private store: Store<NBState>) {}
+  constructor(private store: Store<any>) {
+    this.authProfile$ = store.pipe(
+      select(getCurrentUser),
+      tap(user => {
+        if (!user.profile.public) {
+          const banner: Banner = {
+            id: `_make-public`,
+            index: 0,
+            desc: "Looks like your profile isn't public.",
+            buttonText: 'Make Public',
+            action: this.makePublic,
+            color: 'accent'
+          };
+          this.store.dispatch(new AddBanner(banner));
+        }
+      })
+    );
+    this.loading$ = store.pipe(select(getIsAuthLoading));
+  }
 
   ngOnInit() {
-    this.authProfile$ = this.userProfile.pipe(
-      map(([authProfile]) => authProfile)
-    );
-    this.publicProfile$ = this.userProfile.pipe(
-      map(([, publicProfile]) => publicProfile)
-      // tap(profile => {
-      //   const banner: Banner = {
-      //     id: `_make-public`,
-      //     index: 0,
-      //     desc: 'Looks like your profile isn\'t public.',
-      //     buttonText: 'Make Public',
-      //     action: this.makePublic,
-      //     color: 'accent'
-      //   };
-      //   this.store.dispatch(new AddBanner(banner));
-      // })
-    );
-    // TODO: Remove this, and uncomment tap() when dom is built
-    this.publicProfile$.subscribe(profile => {
-      const banner: Banner = {
-        id: `_make-public`,
-        index: 0,
-        desc: "Looks like your profile isn't public.",
-        buttonText: 'Make Public',
-        action: this.makePublic,
-        color: 'accent'
-      };
-      this.store.dispatch(new AddBanner(banner));
-    });
+    // Build forms
   }
 
   ngOnDestroy() {
@@ -55,13 +45,6 @@ export class ManageProfileComponent implements OnInit, OnDestroy {
   }
 
   makePublic(): void {
-    console.log('makePublic()');
-    // const publicProfile = {
-    //   uid: profile.uid,
-    //   avatar: profile.photoURL,
-    //   email: profile.email,
-    //   displayName: profile.displayName
-    // }
-    // return this.profileApi.updateProfile(profile.uid, publicProfile);
+    // this.store.dispatch(new UpdateProfile({public: true}));
   }
 }
