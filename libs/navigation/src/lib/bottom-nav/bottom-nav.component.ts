@@ -16,7 +16,7 @@ import {
   tap
 } from 'rxjs/operators';
 
-import { WindowRef } from '../window-ref.service';
+import { WindowRef } from '@mono/ui-state';
 import { MenuItem } from '../../models';
 
 @Component({

@@ -6,12 +6,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './state';
 import { NotificationBannerEffects } from './notification-banner/effects';
 import { SnackBarEffects } from './snackbar/effects';
+import { RouteEffects } from './router/router.effects';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forFeature('ui', reducers),
-    EffectsModule.forFeature([NotificationBannerEffects, SnackBarEffects])
+    EffectsModule.forFeature([
+      NotificationBannerEffects,
+      SnackBarEffects,
+      RouteEffects
+    ])
   ]
 })
 export class UiStateModule {}
