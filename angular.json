@@ -32,8 +32,10 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/kitchen-sink/src/environments/environment.ts",
-                  "with": "apps/kitchen-sink/src/environments/environment.prod.ts"
+                  "replace":
+                    "apps/kitchen-sink/src/environments/environment.ts",
+                  "with":
+                    "apps/kitchen-sink/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -72,9 +74,7 @@
             "polyfills": "apps/kitchen-sink/src/polyfills.ts",
             "tsConfig": "apps/kitchen-sink/tsconfig.spec.json",
             "karmaConfig": "apps/kitchen-sink/karma.conf.js",
-            "styles": [
-              "apps/kitchen-sink/src/styles.css"
-            ],
+            "styles": ["apps/kitchen-sink/src/styles.css"],
             "scripts": [],
             "assets": [
               "apps/kitchen-sink/src/favicon.ico",
@@ -89,9 +89,7 @@
               "apps/kitchen-sink/tsconfig.app.json",
               "apps/kitchen-sink/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -111,9 +109,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/kitchen-sink-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -151,9 +147,7 @@
               "libs/fb-auth/tsconfig.lib.json",
               "libs/fb-auth/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -191,9 +185,7 @@
               "libs/navigation/tsconfig.lib.json",
               "libs/navigation/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -231,9 +223,7 @@
               "libs/fb-user-profile/tsconfig.lib.json",
               "libs/fb-user-profile/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -259,9 +249,7 @@
               "libs/ui-state/tsconfig.lib.json",
               "libs/ui-state/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -299,9 +287,45 @@
               "libs/notification-banner/tsconfig.lib.json",
               "libs/notification-banner/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "script-loader": {
+      "root": "libs/script-loader",
+      "sourceRoot": "libs/script-loader/src",
+      "projectType": "library",
+      "prefix": "mono",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/script-loader/tsconfig.lib.json",
+            "project": "libs/script-loader/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/script-loader/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/script-loader/src/test.ts",
+            "tsConfig": "libs/script-loader/tsconfig.spec.json",
+            "karmaConfig": "libs/script-loader/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/script-loader/tsconfig.lib.json",
+              "libs/script-loader/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

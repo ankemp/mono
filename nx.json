@@ -9,23 +9,16 @@
   },
   "projects": {
     "kitchen-sink": {
-      "tags": [
-        "app"
-      ]
+      "tags": ["app"]
     },
     "kitchen-sink-e2e": {
       "tags": []
     },
     "fb-auth": {
-      "tags": [
-        "ui",
-        "api"
-      ]
+      "tags": ["ui", "api"]
     },
     "navigation": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "fb-user-profile": {
       "tags": []
@@ -34,6 +27,9 @@
       "tags": []
     },
     "notification-banner": {
+      "tags": []
+    },
+    "script-loader": {
       "tags": []
     }
   }

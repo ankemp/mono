@@ -12,14 +12,14 @@ import {
   GetProfileSuccess,
   GetProfileFail
 } from './profile.actions';
-import { AddSnackBar } from '@mono/ui-state';
+import { AddSnackBar, ofRoute } from '@mono/ui-state';
 
 @Injectable()
 export class ProfileEffects {
   constructor(private actions$: Actions, private profileApi: ProfileService) {}
 
   @Effect()
-  getUser$: Observable<Action> = this.actions$.pipe(
+  getProfile$: Observable<Action> = this.actions$.pipe(
     ofType(ProfileActionTypes.GetProfile),
     map((action: GetProfile) => action.payload),
     mergeMap(uid => this.profileApi.lookupProfile(uid)),
@@ -32,5 +32,14 @@ export class ProfileEffects {
     ofType(ProfileActionTypes.GetProfileFail),
     map((action: GetProfileFail) => action.payload),
     switchMap(({ message }) => of(new AddSnackBar(message)))
+  );
+
+  @Effect()
+  $loadProfile: Observable<Action> = this.actions$.pipe(
+    ofRoute('profile'),
+    switchMap(route => {
+      console.log(route);
+      return of(new GetProfile('123'));
+    })
   );
 }
