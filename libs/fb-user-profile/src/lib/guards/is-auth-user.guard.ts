@@ -24,6 +24,7 @@ export class IsAuthUserGuard implements CanActivate {
       map(user => user.uid),
       map(uid => {
         if (uid === routeUid) {
+          this.router.navigate(['profile', routeUid, 'edit']);
           return true;
         }
         this.router.navigate(['profile', routeUid, 'public']);

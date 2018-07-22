@@ -8,7 +8,6 @@ import { MatInputModule, MatTabsModule } from '@angular/material';
 import { reducer } from './state/profile.reducer';
 import { ProfileEffects } from './state/profile.effects';
 
-import { UserProfileRoutingModule } from './fb-user-profile-routing.module';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import { AccountDetailsFormComponent } from './account-details-form/account-details-form.component';
@@ -20,13 +19,13 @@ import { AccountDetailsFormComponent } from './account-details-form/account-deta
     StoreModule.forFeature('profile', reducer),
     EffectsModule.forFeature([ProfileEffects]),
     MatInputModule,
-    MatTabsModule,
-    UserProfileRoutingModule
+    MatTabsModule
   ],
   declarations: [
     PublicProfileComponent,
     ManageProfileComponent,
     AccountDetailsFormComponent
-  ]
+  ],
+  exports: [ManageProfileComponent]
 })
 export class FbUserProfileModule {}
