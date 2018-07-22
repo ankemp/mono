@@ -1,1 +1,1 @@
-export * from './lib/script-loader.module';
+export * from './public_api';

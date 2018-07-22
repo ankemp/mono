@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 import { Observable, Observer } from 'rxjs';
-import { Script } from '../model';
+import { Script } from '../models';
 
 /** @dynamic */
 @Injectable()
