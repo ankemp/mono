@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, skipWhile } from 'rxjs/operators';
 
 import { User, getCurrentUser, getIsAuthLoading } from '@mono/fb-auth';
 import { Banner, AddBanner, RemoveBanner } from '@mono/ui-state';
@@ -19,6 +19,7 @@ export class ManageProfileComponent implements OnInit, OnDestroy {
   constructor(private store: Store<any>) {
     this.authProfile$ = store.pipe(
       select(getCurrentUser),
+      skipWhile(u => !u.uid),
       tap(user => {
         if (!user.profile.public) {
           const banner: Banner = {

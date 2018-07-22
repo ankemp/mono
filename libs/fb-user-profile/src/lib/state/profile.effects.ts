@@ -12,7 +12,7 @@ import {
   GetProfileSuccess,
   GetProfileFail
 } from './profile.actions';
-import { AddSnackBar, ofRoute } from '@mono/ui-state';
+import { AddSnackBar, ofRoute, RouterChange } from '@mono/ui-state';
 
 @Injectable()
 export class ProfileEffects {
@@ -36,10 +36,8 @@ export class ProfileEffects {
 
   @Effect()
   $loadProfile: Observable<Action> = this.actions$.pipe(
-    ofRoute('profile'),
-    switchMap(route => {
-      console.log(route);
-      return of(new GetProfile('123'));
-    })
+    ofRoute([':uid/edit', ':uid/public']),
+    map((action: RouterChange) => action.payload),
+    switchMap(route => of(new GetProfile(route.params['uid'])))
   );
 }
