@@ -4,7 +4,7 @@ import { Router, ActivationEnd } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 
-import { Observable, empty } from 'rxjs';
+import { Observable, NEVER } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 import { RouterActionTypes, RouterGo, RouterChange } from './router.actions';
@@ -27,7 +27,7 @@ export class RouteEffects {
     tap(({ path, queryParams, extras }) =>
       this.router.navigate(path, { queryParams, ...extras })
     ),
-    map(() => empty())
+    map(() => NEVER)
   );
 
   @Effect({ dispatch: false })

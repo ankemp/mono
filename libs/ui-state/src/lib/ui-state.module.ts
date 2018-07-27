@@ -7,6 +7,7 @@ import { reducers } from './state';
 import { NotificationBannerEffects } from './notification-banner/effects';
 import { SnackBarEffects } from './snackbar/effects';
 import { RouteEffects } from './router/router.effects';
+import { SideNavEffects } from './sidenav/sidenav.effects';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { RouteEffects } from './router/router.effects';
     EffectsModule.forFeature([
       NotificationBannerEffects,
       SnackBarEffects,
-      RouteEffects
+      RouteEffects,
+      SideNavEffects
     ])
   ]
 })

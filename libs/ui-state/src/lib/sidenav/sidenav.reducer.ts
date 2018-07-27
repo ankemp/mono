@@ -1,4 +1,4 @@
-import { SNActionTypes, SNActionsUnion } from './actions';
+import { SNActionTypes, SNActionsUnion } from './sidenav.actions';
 
 export interface State {
   isSmallScreen: boolean;

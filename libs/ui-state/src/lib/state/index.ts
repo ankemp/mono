@@ -4,7 +4,7 @@ import {
   ActionReducerMap
 } from '@ngrx/store';
 import * as fromNB from '../notification-banner/reducer';
-import * as fromSN from '../sidenav/reducer';
+import * as fromSN from '../sidenav/sidenav.reducer';
 import * as fromSB from '../snackbar/reducer';
 
 export interface UIState {

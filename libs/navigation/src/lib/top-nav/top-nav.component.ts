@@ -1,16 +1,13 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { map, distinctUntilChanged } from 'rxjs/operators';
 
 import {
   SNState,
   getSideNavMode,
   ToggleSideNav,
-  getSideNavState,
-  SetSmallScreen
+  getSideNavState
 } from '@mono/ui-state';
 import { MenuItem } from '../../models';
 
@@ -26,25 +23,12 @@ export class TopNavComponent implements OnInit {
   sidenavOpened$: Observable<boolean>;
   menuMode$: Observable<string>;
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private store: Store<SNState>
-  ) {
+  constructor(private store: Store<SNState>) {
     this.menuMode$ = store.pipe(select(getSideNavMode));
     this.sidenavOpened$ = store.pipe(select(getSideNavState));
   }
 
-  ngOnInit() {
-    this.breakpointObserver
-      .observe('(max-width: 786px)')
-      .pipe(
-        map((state: BreakpointState) => state.matches),
-        distinctUntilChanged()
-      )
-      .subscribe(isSmallScreen =>
-        this.store.dispatch(new SetSmallScreen(isSmallScreen))
-      );
-  }
+  ngOnInit() {}
 
   toggleSidenav(): void {
     this.store.dispatch(new ToggleSideNav());
