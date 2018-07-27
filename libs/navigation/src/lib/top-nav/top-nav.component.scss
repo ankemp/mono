@@ -1,3 +1,5 @@
+$transition: 250ms ease-in-out;
+
 :host() {
   display: block;
   height: 100%;
@@ -23,16 +25,27 @@
 .sidebar-logo-block {
   align-items: center;
   display: flex;
-  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  font: 500 20px/32px Roboto, 'Helvetica Neue', sans-serif;
   justify-content: center;
+  transform: translate3d(125px, 0, 0);
   min-height: 56px;
+  opacity: 0;
+  transition-delay: 150ms;
+  transition-property: transform, opacity;
+  transition: $transition;
+}
+
+.sidebar-logo-block.show {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
 }
 
 :host() ::ng-deep .mat-selection-list {
   .mat-list-text {
     align-items: center;
     flex-direction: row !important;
-    &, span {
+    &,
+    span {
       font-size: 16px !important;
     }
   }
@@ -46,11 +59,15 @@
 }
 
 .title {
-  display: inline-flex;
   align-content: center;
   cursor: pointer;
+  display: inline-flex;
   font-weight: normal;
+  transform: translate3d(0, 0, 0);
   overflow: hidden;
+  transition-delay: 150ms;
+  transition-property: transform, opacity;
+  transition: $transition;
 }
 
 .title img {
@@ -70,17 +87,19 @@
 
 @media (min-width: 30em) {
   .sidebar-logo-block {
-      min-height: 64px;
+    min-height: 64px;
   }
 }
 
 @media (min-width: 48em) {
   .sidenav-button {
-      display: block !important;
-      margin-right: 16px;
-      min-width: 0;
+    display: block !important;
+    margin-right: 16px;
+    min-width: 0;
   }
   .title:not(.show) {
-      display: none;
+    transform: translate3d(-125px, 0, 0);
+    opacity: 0;
+    pointer-events: none;
   }
 }

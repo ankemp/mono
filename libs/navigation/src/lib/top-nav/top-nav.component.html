@@ -10,7 +10,7 @@
   <ng-content select="mono-banner-container"></ng-content>
 
   <mat-sidenav #sidenav [mode]="menuMode$ | async" [opened]="sidenavOpened$ | async">
-    <div class="sidebar-logo-block" routerLink="/">{{ appName }}</div>
+    <div class="sidebar-logo-block show" [class.show]="(sidenavOpened$ | async)" routerLink="/">{{ appName }}</div>
     <mat-selection-list *ngIf="menuItems">
       <mat-list-option *ngFor="let item of menuItems" [routerLink]="item.route">
         <mat-icon matListIcon color="accent">{{ item.icon }}</mat-icon>
