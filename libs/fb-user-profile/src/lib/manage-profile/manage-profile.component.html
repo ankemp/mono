@@ -1,11 +1,11 @@
 <mat-toolbar>
   <h1>Manage Account</h1>
 </mat-toolbar>
-<mat-tab-group mat-stretch-tabs>
+<mat-tab-group mat-stretch-tabs selectedIndex="1">
   <mat-tab label="Profile">
     <ng-content></ng-content>
   </mat-tab>
   <mat-tab label="Account">
-    <mono-account-details-form [accountDetails]="authProfile$ | async"></mono-account-details-form>
-  </mat-tab>
+    <mono-account-details-form *ngIf="(authProfile$ | async)" [accountDetails]="authProfile$ | async"></mono-account-details-form>
+  </mat-tab>40
 </mat-tab-group>

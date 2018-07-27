@@ -1,0 +1,27 @@
+:host() {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.update-profile {
+  align-self: flex-end;
+}
+
+@media (min-width: 30em) {
+  form {
+    width: 60%;
+  }
+}

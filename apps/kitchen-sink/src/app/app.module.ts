@@ -27,7 +27,9 @@ import { AppComponent } from './app.component';
     NxModule.forRoot(),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    !environment.production
+      ? StoreDevtoolsModule.instrument({ name: 'kitchen-sink' })
+      : [],
     MatIconModule,
     MatMenuModule,
     AngularFireModule.initializeApp(environment.firebase),
