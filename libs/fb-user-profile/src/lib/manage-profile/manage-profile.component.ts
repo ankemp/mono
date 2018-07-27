@@ -2,9 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { tap, skipWhile } from 'rxjs/operators';
+import { tap, skipWhile, take } from 'rxjs/operators';
 
 import { User, getCurrentUser, getIsAuthLoading } from '@mono/fb-auth';
+import { UpdateProfile } from '../state/profile.actions';
 import { Banner, AddBanner, RemoveBanner } from '@mono/ui-state';
 
 @Component({
@@ -20,6 +21,7 @@ export class ManageProfileComponent implements OnInit, OnDestroy {
     this.authProfile$ = store.pipe(
       select(getCurrentUser),
       skipWhile(u => !u.uid),
+      take(1),
       tap(user => {
         if (!user.profile.public) {
           const banner: Banner = {
@@ -27,7 +29,7 @@ export class ManageProfileComponent implements OnInit, OnDestroy {
             index: 0,
             desc: "Looks like your profile isn't public.",
             buttonText: 'Make Public',
-            action: this.makePublic,
+            action: () => this.makePublic(user.profile.uid),
             color: 'accent'
           };
           this.store.dispatch(new AddBanner(banner));
@@ -45,7 +47,7 @@ export class ManageProfileComponent implements OnInit, OnDestroy {
     this.store.dispatch(new RemoveBanner('_make-public'));
   }
 
-  makePublic(): void {
-    // this.store.dispatch(new UpdateProfile({public: true}));
+  makePublic(uid: string): void {
+    this.store.dispatch(new UpdateProfile({ uid, public: true }));
   }
 }

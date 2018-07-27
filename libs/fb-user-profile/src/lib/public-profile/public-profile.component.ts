@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { skipWhile } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { getCurrentProfile } from '../state';
 
@@ -17,7 +17,12 @@ export class PublicProfileComponent {
   constructor(private store: Store<any>) {
     this.profile$ = this.store.pipe(
       select(getCurrentProfile),
-      skipWhile(u => !u.uid)
+      map(user => {
+        if (!user || !user.public) {
+          return false;
+        }
+        return user;
+      })
     );
   }
 }

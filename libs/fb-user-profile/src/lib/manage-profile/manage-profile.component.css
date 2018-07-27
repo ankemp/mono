@@ -1,0 +1,7 @@
+:host() {
+  display: block;
+}
+
+.mat-toolbar {
+  margin: -16px -16px 0;
+}

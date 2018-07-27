@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 
 import { Observable, of, throwError, combineLatest } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, switchMap, catchError, take } from 'rxjs/operators';
 
 import { AuthService, ProfileService } from '../services';
 import {
@@ -36,7 +36,7 @@ export class AuthEffects {
       if (authState) {
         return combineLatest(
           of(authState),
-          this.profileApi.lookupProfile(authState.uid)
+          this.profileApi.lookupProfile(authState.uid).pipe(take(1))
         );
       }
       return throwError({
@@ -44,7 +44,7 @@ export class AuthEffects {
         message: 'No User Authenticated'
       });
     }),
-    map(([authState, profile]: Array<any>) => {
+    map(([authState, profile]) => {
       let user: User;
       if (authState) {
         user = new User(
@@ -56,12 +56,10 @@ export class AuthEffects {
       }
       return user;
     }),
-    switchMap(user => {
-      if (!!user) {
-        return of(new Authenticated(user));
-      }
-      return of(new NotAuthenticated());
-    }),
+    switchMap(
+      user =>
+        !!user ? of(new Authenticated(user)) : of(new NotAuthenticated())
+    ),
     catchError(err => of(new AuthError(err)))
   );
 

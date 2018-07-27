@@ -1,15 +1,13 @@
 import { ProfileActionTypes, ProfileActionUnion } from './profile.actions';
 
 export interface State {
-  profiles: any[];
-  currentProfileUID: string;
+  profile: any;
   loading: boolean;
   error: any;
 }
 
 export const initialState: State = {
-  profiles: [],
-  currentProfileUID: undefined,
+  profile: undefined,
   loading: false,
   error: undefined
 };
@@ -19,7 +17,8 @@ export function reducer(
   action: ProfileActionUnion
 ) {
   switch (action.type) {
-    case ProfileActionTypes.GetProfile: {
+    case ProfileActionTypes.GetProfile:
+    case ProfileActionTypes.UpdateProfile: {
       return {
         ...state,
         loading: true
@@ -29,15 +28,24 @@ export function reducer(
     case ProfileActionTypes.GetProfileSuccess: {
       return {
         ...state,
-        profiles: [...state.profiles, action.payload],
-        currentProfileUID: action.payload.uid,
+        profile: action.payload,
         loading: false
       };
     }
 
-    case ProfileActionTypes.GetProfileFail: {
+    case ProfileActionTypes.UpdateProfileSuccess: {
       return {
         ...state,
+        profile: action.payload,
+        loading: false
+      };
+    }
+
+    case ProfileActionTypes.GetProfileFail:
+    case ProfileActionTypes.UpdateProfileFail: {
+      return {
+        ...state,
+        loading: false,
         error: action.payload
       };
     }

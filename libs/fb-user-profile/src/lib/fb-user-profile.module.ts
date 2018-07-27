@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { MatInputModule, MatTabsModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatInputModule,
+  MatTabsModule,
+  MatToolbarModule
+} from '@angular/material';
 
 import { reducer } from './state/profile.reducer';
 import { ProfileEffects } from './state/profile.effects';
@@ -18,8 +23,10 @@ import { AccountDetailsFormComponent } from './account-details-form/account-deta
     ReactiveFormsModule,
     StoreModule.forFeature('profile', reducer),
     EffectsModule.forFeature([ProfileEffects]),
+    MatButtonModule,
     MatInputModule,
-    MatTabsModule
+    MatTabsModule,
+    MatToolbarModule
   ],
   declarations: [
     PublicProfileComponent,

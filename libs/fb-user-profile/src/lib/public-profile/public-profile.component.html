@@ -1,6 +1,6 @@
-<div *ngIf="userProfile; else noPublicProfile">
+<div *ngIf="(profile$ | async); else noPublicProfile">
   <h1>Profile</h1>
-  {{ userProfile | json }}
+  <pre>{{ profile$ | async | json }}</pre>
 </div>
 <ng-template #noPublicProfile>
   <h1>User doesn't have a public profile</h1>
