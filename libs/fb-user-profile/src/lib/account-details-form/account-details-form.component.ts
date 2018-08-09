@@ -3,12 +3,17 @@ import {
   FormBuilder,
   FormGroup,
   FormControl,
-  Validators,
-  AbstractControl
+  Validators
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { AuthState, IUser, AuthService, AuthValidators } from '@mono/fb-auth';
+import {
+  AuthState,
+  IUser,
+  AuthService,
+  AuthValidators,
+  UpdateAccount
+} from '@mono/fb-auth';
 
 @Component({
   selector: 'mono-account-details-form',
@@ -16,7 +21,8 @@ import { AuthState, IUser, AuthService, AuthValidators } from '@mono/fb-auth';
   styleUrls: ['./account-details-form.component.css']
 })
 export class AccountDetailsFormComponent implements OnInit {
-  @Input() accountDetails: IUser;
+  @Input()
+  accountDetails: IUser;
   form: FormGroup;
 
   constructor(
@@ -31,8 +37,8 @@ export class AccountDetailsFormComponent implements OnInit {
     const form = {
       email: new FormControl(
         this.accountDetails.email,
-        [Validators.required, Validators.email],
-        AuthValidators.email(this.authApi)
+        [Validators.required, Validators.email]
+        // AuthValidators.email(this.authApi)
       ),
       displayName: new FormControl(this.accountDetails.displayName, [
         Validators.required
@@ -44,7 +50,10 @@ export class AccountDetailsFormComponent implements OnInit {
 
   submit(event: Event): void {
     event.preventDefault();
-    console.log('account-details-form submit()');
-    // this.store.dispatch(new UpdateAccount(profile));
+    console.log('account-details-form submit()', this.form.value);
+    const profile = {
+      ...this.form.value
+    };
+    this.store.dispatch(new UpdateAccount(profile));
   }
 }

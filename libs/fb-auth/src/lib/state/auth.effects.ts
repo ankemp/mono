@@ -2,8 +2,16 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 
-import { Observable, of, throwError, combineLatest } from 'rxjs';
-import { map, switchMap, catchError, take } from 'rxjs/operators';
+import { Observable, of, throwError, combineLatest, from } from 'rxjs';
+import {
+  map,
+  switchMap,
+  catchError,
+  take,
+  mergeMap,
+  withLatestFrom,
+  concatMap
+} from 'rxjs/operators';
 
 import { AuthService, ProfileService } from '../services';
 import {
@@ -13,10 +21,12 @@ import {
   NotAuthenticated,
   AuthError,
   OAuthLogin,
-  Login
+  Login,
+  UpdateAccount,
+  UpdateAccountSuccess
 } from './auth.actions';
 import { AddSnackBar } from '@mono/ui-state';
-import { User } from '../../models';
+import { User, IUser } from '../../models';
 
 @Injectable()
 export class AuthEffects {
@@ -40,7 +50,7 @@ export class AuthEffects {
         );
       }
       return throwError({
-        code: 'no-user-authenticated',
+        code: 'auth/no-user-authenticated',
         message: 'No User Authenticated'
       });
     }),
@@ -100,6 +110,36 @@ export class AuthEffects {
         })
       )
     )
+  );
+
+  @Effect()
+  updateAccount$: Observable<Action> = this.actions$.pipe(
+    ofType(AuthActionTypes.UpdateAccount),
+    map((action: UpdateAccount) => action.payload),
+    withLatestFrom(this.authApi.authState),
+    concatMap(([profile, user]) =>
+      from(
+        user
+          .updateProfile({
+            displayName: profile.displayName,
+            photoURL: profile.photoURL
+          })
+          .then(() => ({ profile, user }))
+      )
+    ),
+    concatMap(({ profile, user }) =>
+      from(user.updateEmail(profile.email).then(() => user))
+    ),
+    concatMap(authState =>
+      this.profileApi.lookupProfile(authState.uid).pipe(take(1))
+    ),
+    mergeMap(user => [
+      new UpdateAccountSuccess(user as IUser),
+      new AddSnackBar({
+        message: 'Profile Updated',
+        priority: 0
+      })
+    ])
   );
 
   @Effect()

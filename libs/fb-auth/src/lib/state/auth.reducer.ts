@@ -34,6 +34,13 @@ export function reducer(state: State = initialState, action: AuthActionsUnion) {
       };
     }
 
+    case AuthActionTypes.UpdateAccountSuccess: {
+      return {
+        ...state,
+        ...action.payload
+      };
+    }
+
     case AuthActionTypes.AuthError: {
       return {
         ...state,
