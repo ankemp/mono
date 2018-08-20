@@ -2642,6 +2642,10 @@ faye-websocket@^0.10.0:
   dependencies:
     websocket-driver ">=0.5.1"
 
+file-input-accessor@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/file-input-accessor/-/file-input-accessor-2.0.0.tgz#b5b652d2ca866aea0fb3eac54474e5dea09cb8a9"
+
 file-loader@^1.1.11:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-1.1.11.tgz#6fe886449b0f2a936e43cabaac0cdbfb369506f8"

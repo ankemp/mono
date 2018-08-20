@@ -3,13 +3,7 @@ import { Action } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 
 import { Observable, of } from 'rxjs';
-import {
-  map,
-  switchMap,
-  catchError,
-  mergeMap,
-  concatMap
-} from 'rxjs/operators';
+import { map, catchError, mergeMap, concatMap } from 'rxjs/operators';
 
 import { ProfileService } from '@mono/fb-auth';
 import {
@@ -31,7 +25,7 @@ export class ProfileEffects {
     ofType(ProfileActionTypes.GetProfile),
     map((action: GetProfile) => action.payload),
     mergeMap(uid => this.profileApi.lookupProfile(uid)),
-    switchMap(user => of(new GetProfileSuccess(user))),
+    map(user => new GetProfileSuccess(user)),
     catchError(err => of(new GetProfileFail(err)))
   );
 
@@ -39,7 +33,7 @@ export class ProfileEffects {
   getProfileFail$: Observable<Action> = this.actions$.pipe(
     ofType(ProfileActionTypes.GetProfileFail),
     map((action: GetProfileFail) => action.payload),
-    switchMap(({ message }) => of(new AddSnackBar(message)))
+    map(({ message }) => new AddSnackBar(message))
   );
 
   @Effect()
@@ -47,7 +41,7 @@ export class ProfileEffects {
     ofType(ProfileActionTypes.UpdateProfile),
     map((action: UpdateProfile) => action.payload),
     concatMap(profile => this.profileApi.updateProfile(profile.uid, profile)),
-    concatMap(profile => of(new UpdateProfileSuccess(profile)))
+    map(profile => new UpdateProfileSuccess(profile))
   );
 
   // Route Effects
@@ -55,6 +49,6 @@ export class ProfileEffects {
   loadProfile$: Observable<Action> = this.actions$.pipe(
     ofRoute([':uid/edit', ':uid/public']),
     map((action: RouterChange) => action.payload),
-    switchMap(route => of(new GetProfile(route.params['uid'])))
+    map(route => new GetProfile(route.params['uid']))
   );
 }

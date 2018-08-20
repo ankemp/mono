@@ -42,7 +42,8 @@ export class AccountDetailsFormComponent implements OnInit {
       ),
       displayName: new FormControl(this.accountDetails.displayName, [
         Validators.required
-      ])
+      ]),
+      avatar: new FormControl(null)
     };
     // Add/Show password fields if account has password - Need to check providers for this
     this.form = this.fb.group(form);

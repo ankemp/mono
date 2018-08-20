@@ -9,6 +9,7 @@ import {
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
+import { FileInputAccessorModule } from 'file-input-accessor';
 
 import { reducer } from './state/profile.reducer';
 import { ProfileEffects } from './state/profile.effects';
@@ -26,7 +27,8 @@ import { AccountDetailsFormComponent } from './account-details-form/account-deta
     MatButtonModule,
     MatInputModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FileInputAccessorModule
   ],
   declarations: [
     PublicProfileComponent,
