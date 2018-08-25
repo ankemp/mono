@@ -9,7 +9,7 @@ export const environment = {
     authDomain: 'mono-kitchen-sink.firebaseapp.com',
     databaseURL: 'https://mono-kitchen-sink.firebaseio.com',
     projectId: 'mono-kitchen-sink',
-    storageBucket: '',
+    storageBucket: 'gs://mono-kitchen-sink.appspot.com',
     messagingSenderId: '766031976497'
   },
   auth: {

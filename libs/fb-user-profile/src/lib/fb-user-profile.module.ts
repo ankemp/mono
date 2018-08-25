@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import {
   MatButtonModule,
   MatInputModule,
+  MatProgressSpinnerModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -26,6 +27,7 @@ import { AccountDetailsFormComponent } from './account-details-form/account-deta
     EffectsModule.forFeature([ProfileEffects]),
     MatButtonModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     MatTabsModule,
     MatToolbarModule,
     FileInputAccessorModule

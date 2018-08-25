@@ -123,16 +123,18 @@ export class AuthEffects {
           .updateProfile({
             displayName: profile.displayName,
             photoURL: profile.photoURL
+            // photoURL is refusing to save.
           })
           .then(() => ({ profile, user }))
       )
     ),
     concatMap(({ profile, user }) =>
-      from(user.updateEmail(profile.email).then(() => user))
+      from(user.updateEmail(profile.email).then(() => ({ profile, user })))
     ),
-    concatMap(authState =>
-      this.profileApi.lookupProfile(authState.uid).pipe(take(1))
+    concatMap(({ profile, user }) =>
+      this.profileApi.updateProfile(user.uid, profile).pipe(map(() => user))
     ),
+    switchMap(user => this.profileApi.lookupProfile(user.uid).pipe(take(1))),
     mergeMap(user => [
       new UpdateAccountSuccess(user as IUser),
       new AddSnackBar({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class ProfileService {
       );
   }
 
-  updateProfile(uid: string, profile): Promise<any> {
-    return this.afs.doc<any>(`profiles/${uid}`).set(profile);
+  updateProfile(uid: string, profile): Observable<void> {
+    return from(this.afs.doc<any>(`profiles/${uid}`).set(profile));
   }
 }

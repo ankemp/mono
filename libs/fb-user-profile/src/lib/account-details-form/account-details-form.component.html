@@ -7,12 +7,11 @@
     <mat-label>Display Name</mat-label>
     <input matInput type="text" formControlName="displayName" placeholder="Display Name">
   </mat-form-field>
-  <!-- <mat-form-field> -->
-  <!-- <mat-label>Avatar</mat-label> -->
-  <div>
-    <img *ngIf="!form.get('avatar')" [src]="form.get('avatar')" />
-    <input type="file" formControlName="avatar">
+  <div class="avatar-container">
+    <mat-progress-spinner [class.hide]="(uploadProgress$ | async) === 100" diameter="24" mode="determinate" [value]="(uploadProgress$ | async)"></mat-progress-spinner>
+    <img *ngIf="!!form.get('photoURL').value" class="avatar-preview" [src]="form.get('photoURL').value" />
+    <input [class.hide]="!!form.get('photoURL').value" type="file" formControlName="avatarFile" />
+    <input type="hidden" formControlName="photoURL" />
   </div>
-  <!-- </mat-form-field> -->
   <button class="update-profile" mat-raised-button color="primary" type="submit">Update Account</button>
 </form>
