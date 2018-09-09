@@ -6,7 +6,7 @@ export interface State {
   activeBanner: string;
 }
 
-const initialState: State = {
+export const initialState: State = {
   banners: [],
   activeBanner: ''
 };
@@ -27,7 +27,9 @@ export function reducer(
     case NBActionTypes.DoBannerActionSuccess: {
       return {
         ...state,
-        banners: state.banners.filter(({ id }) => id !== action.payload)
+        banners: state.banners.filter(({ id }) => id !== action.payload),
+        activeBanner:
+          state.activeBanner === action.payload ? '' : state.activeBanner
       };
     }
 

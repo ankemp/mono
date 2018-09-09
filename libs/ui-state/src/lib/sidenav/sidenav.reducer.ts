@@ -6,7 +6,7 @@ export interface State {
   showSideNav: boolean;
 }
 
-const initialState: State = {
+export const initialState: State = {
   isSmallScreen: false,
   menuMode: 'side',
   showSideNav: true
