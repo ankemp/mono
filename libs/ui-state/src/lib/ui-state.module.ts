@@ -4,8 +4,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { reducers } from './state';
-import { NotificationBannerEffects } from './notification-banner/effects';
-import { SnackBarEffects } from './snackbar/effects';
+import { NotificationBannerEffects } from './notification-banner/notification-banner.effects';
+import { SnackBarEffects } from './snackbar/snackbar.effects';
 import { RouteEffects } from './router/router.effects';
 import { SideNavEffects } from './sidenav/sidenav.effects';
 

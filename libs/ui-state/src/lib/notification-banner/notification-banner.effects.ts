@@ -9,7 +9,7 @@ import {
   NBActionTypes,
   DoBannerAction,
   DoBannerActionSuccess
-} from './actions';
+} from './notification-banner.actions';
 
 @Injectable()
 export class NotificationBannerEffects {

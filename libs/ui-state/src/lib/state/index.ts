@@ -3,9 +3,9 @@ import {
   createFeatureSelector,
   ActionReducerMap
 } from '@ngrx/store';
-import * as fromNB from '../notification-banner/reducer';
+import * as fromNB from '../notification-banner/notification-banner.reducer';
 import * as fromSN from '../sidenav/sidenav.reducer';
-import * as fromSB from '../snackbar/reducer';
+import * as fromSB from '../snackbar/snackbar.reducer';
 
 export interface UIState {
   notificationBanner: fromNB.State;

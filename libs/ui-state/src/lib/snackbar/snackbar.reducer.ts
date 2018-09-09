@@ -1,4 +1,4 @@
-import { SBActionTypes, SBActionsUnion } from './actions';
+import { SBActionTypes, SBActionsUnion } from './snackbar.actions';
 import { SnackBar, ISnackBar } from '../../models';
 
 export interface State {
@@ -6,7 +6,7 @@ export interface State {
   active: string;
 }
 
-const initialState: State = {
+export const initialState: State = {
   bars: [],
   active: undefined
 };

@@ -14,7 +14,7 @@ import {
   CloseSnackbarSuccess,
   AddSnackBarSuccess,
   OpenSnackBarSuccess
-} from './actions';
+} from './snackbar.actions';
 import { UIState, getSBState } from '../state';
 import { SnackBar } from '../../models';
 

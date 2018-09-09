@@ -1,4 +1,4 @@
-import { NBActionTypes, NBActionsUnion } from './actions';
+import { NBActionTypes, NBActionsUnion } from './notification-banner.actions';
 import { Banner } from '../../models';
 
 export interface State {

@@ -25,6 +25,11 @@ export class ProfileService {
   }
 
   updateProfile(uid: string, profile): Observable<void> {
-    return from(this.afs.doc<any>(`profiles/${uid}`).set(profile));
+    return from(
+      this.afs
+        .doc<any>(`profiles/${uid}`)
+        .set(profile)
+        .then(() => profile)
+    );
   }
 }
