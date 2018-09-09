@@ -66,10 +66,7 @@ export class AuthEffects {
       }
       return user;
     }),
-    switchMap(
-      user =>
-        !!user ? of(new Authenticated(user)) : of(new NotAuthenticated())
-    ),
+    map(user => (!!user ? new Authenticated(user) : new NotAuthenticated())),
     catchError(err => of(new AuthError(err)))
   );
 
